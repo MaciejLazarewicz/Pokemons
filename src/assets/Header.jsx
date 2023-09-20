@@ -28,7 +28,7 @@ function Header() {
       <Stack direction="row">
         <Box mr={24} mt={10} display="flex" alignItems="center">
           <Button cursor="pointer " borderStyle="none" bgColor="inherit">
-            <HamburgerIcon boxSize={48} color="#fff" />
+            <HamburgerIcon boxSize={48} color="red" />
           </Button>
         </Box>
       </Stack>
