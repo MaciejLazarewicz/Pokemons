@@ -7,16 +7,3 @@
 }/*
 
 
-onClick={onOpen}const { isOpen, onOpen, onClose } = useDisclosure();
-    const [placement, setPlacement] = React.useState('right');
-
-
-
-    <Drawer isOpen={isOpen} placement={'right'}
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      ></Drawer>
-
-
-       const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()

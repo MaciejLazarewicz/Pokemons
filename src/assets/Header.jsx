@@ -1,25 +1,16 @@
 import {
   Heading,
   Box,
-  Stack,
-  Link
-  
+  Button,
+  Stack
  
 } from '@chakra-ui/react';
-import NavButton from './Navigation.jsx';
 
-
-
-
-
-
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 
 
 function Header() {
-  
-  
-
   return (
     <Box
       display="flex"
@@ -30,20 +21,16 @@ function Header() {
       zIndex={2}
     >
       <Box ml={26}>
-        <Link
-          borderStyle="none"
-          bgColor="inherit"
-          cursor="pointer"
-          href="https://www.pokemon.com/us/pokedex"
-          textDecoration="none"
-        >
-          <Heading as="h2" fontSize={36} color="#fff">
-            PokeDex
-          </Heading>
-        </Link>
+        <Heading as="h2" fontSize={36} color="#fff">
+          PokeDex
+        </Heading>
       </Box>
       <Stack direction="row">
-        <NavButton />
+        <Box mr={24} mt={10} display="flex" alignItems="center">
+          <Button cursor="pointer " borderStyle="none" bgColor="inherit">
+            <HamburgerIcon boxSize={48} color="#fff" />
+          </Button>
+        </Box>
       </Stack>
     </Box>
   );
