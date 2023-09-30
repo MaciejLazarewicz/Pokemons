@@ -37,6 +37,7 @@ function NavButton() {
       alignItems="center"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      
     >
       <Drawer
         isOpen={isOpen}
@@ -47,10 +48,11 @@ function NavButton() {
         <DrawerContent
           maxWidth="300px"
           flexDirection="column"
-          bgColor="#F7FAFC"
+          bgColor="#F3F3F3"
           gap={24}
           fontSize={24}
-          fontWeight="700"
+          fontWeight="500"
+          borderLeft="1px solid #D5D5D5"
         >
           <Box>
             <DrawerCloseButton
@@ -58,39 +60,70 @@ function NavButton() {
               alignItems="start"
               borderStyle="none"
               bgColor="inherit"
+              
             >
               <ChevronRightIcon
                 boxSize={60}
                 color="#718096"
                 bgColor={isHovered ? 'RGBA(0, 0, 0, 0.06)' : 'inherit'}
-                transition="background-color 0.5s ease"
+                transition="background-color 1s ease"
                 borderRadius="60%"
+                cursor="pointer"
+                
               />
             </DrawerCloseButton>
           </Box>
-          <Box
-            display="flex"
-            alignItems="center"
-            flexDirection="column"
-            gap={24}
-          >
-            <DrawerBody>
-              <Link
-                borderStyle="none"
-                bgColor="inherit"
-                cursor="pointer"
-                href=""
-                textDecoration="none"
-              >
-                Home
-              </Link>
-            </DrawerBody>
-            <DrawerBody>
-              <Link>Pokemon</Link>
-            </DrawerBody>
+          <Box>
+            <Box
+              borderTop="1px solid #D5D5D5"
+              borderBottom="1px solid #D5D5D5"
+              width="100%"
+              display="flex"
+              alignItems="center"
+              flexDirection="column"
+              gap={24}
+              pt={24}
+              pb={24}
+            >
+              <DrawerBody>
+                <Link
+                  borderStyle="none"
+                  bgColor="inherit"
+                  cursor="pointer"
+                  href=""
+                  textDecoration="none"
+                  color="inherit"
+                >
+                  Home
+                </Link>
+              </DrawerBody>
+            </Box>
+
+            <Box
+              borderBottom="1px solid #D5D5D5"
+              width="100%"
+              display="flex"
+              alignItems="center"
+              flexDirection="column"
+              gap={24}
+              pt={24}
+              pb={24}
+            >
+              <DrawerBody>
+                <Button
+                  fontSize="inherit"
+                  fontWeight="inherit"
+                  borderStyle="none"
+                  cursor='pointer'
+                >
+                  Pokemon
+                </Button>
+              </DrawerBody>
+            </Box>
           </Box>
         </DrawerContent>
       </Drawer>
+
       <Button
         ref={btnRef}
         onClick={onOpen}
