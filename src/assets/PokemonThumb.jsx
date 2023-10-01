@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Image,Button, useColorMode } from "@chakra-ui/react"
+import { Box, Card, CardBody, Image,Button } from "@chakra-ui/react"
 
 import { useHover } from "./variables/hovered";
 
