@@ -1,6 +1,6 @@
 import Header from './assets/Header'
 
-=======
+
 import { Box,Button } from '@chakra-ui/react'
 import InputBar from './assets/Input'
 import { useEffect, useState } from 'react';
@@ -27,7 +27,7 @@ function App() {
   const [allPokemons, setAllPokemons] = useState([])
 
 
-=======
+
  
 
   
@@ -92,8 +92,7 @@ function App() {
 
   
 
-=======
-  
+
 
 
   allPokemons.sort((a, b) => (a.id > b.id ? 1 : -1));
@@ -116,7 +115,6 @@ function App() {
   return (
     <Box display="flex" flexDir="column" gap={20} bgColor=" #F3F3F3">
 
-=======
       <InputBar />
       <Box display="flex" justifyContent="flex-end">
         <Button onClick={handlePrevPage} >
