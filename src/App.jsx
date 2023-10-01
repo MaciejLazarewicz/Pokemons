@@ -95,7 +95,6 @@ function App() {
 
 
 
-
   allPokemons.sort((a, b) => (a.id > b.id ? 1 : -1));
 
    useEffect(() => {
@@ -115,8 +114,6 @@ function App() {
 
   return (
     <Box display="flex" flexDir="column" gap={20} bgColor=" #F3F3F3">
-      <Header/>
-
 
       <InputBar />
       <Box display="flex" justifyContent="flex-end">
