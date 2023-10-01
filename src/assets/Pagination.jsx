@@ -33,7 +33,7 @@ export default function Pagination({ handlePrevPage, handleNextPage }) {
           <ChevronLeftIcon
             boxSize={50}
             cursor="pointer"
-            color={isHoveredLeft ? '#F50057' : '#0D131A'}
+            color={isHoveredLeft ? 'red' : '#0D131A'}
             onMouseEnter={handleMouseEnterLeft}
             onMouseLeave={handleMouseLeaveLeft}
           />
