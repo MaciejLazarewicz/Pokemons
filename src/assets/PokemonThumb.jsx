@@ -40,7 +40,7 @@ const PokemonThumb = ({ id, name, image, type }) => {
           >
             <Image
               pt={20}
-              width="400px"
+              width="300px"
               height="150px"
               src={image}
               alt={name}
