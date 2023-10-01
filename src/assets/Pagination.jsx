@@ -1,8 +1,15 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { useHover } from './variables/hovered';
 
+import { Link } from 'react-router-dom';
+
+
+
+
+
 export default function Pagination({ handlePrevPage, handleNextPage }) {
+ 
   const {
     isHovered: isHoveredLeft,
     handleMouseEnter: handleMouseEnterLeft,
@@ -16,25 +23,27 @@ export default function Pagination({ handlePrevPage, handleNextPage }) {
 
   const buttonStyle = {
     border: 'none',
-    bgColor: 'inherit',
+    bgcolor: 'inherit',
   };
+  
 
   return (
     <Box display="flex">
       {handlePrevPage && (
-        <Button onClick={handlePrevPage} {...buttonStyle}>
+        <Link {...buttonStyle}>
           <ChevronLeftIcon
             boxSize={50}
             cursor="pointer"
             color={isHoveredLeft ? '#F50057' : '#0D131A'}
             onMouseEnter={handleMouseEnterLeft}
             onMouseLeave={handleMouseLeaveLeft}
+            onClick={handlePrevPage}
           />
-        </Button>
+        </Link>
       )}
 
       {handleNextPage && (
-        <Button onClick={handleNextPage} {...buttonStyle}>
+        <Link  onClick={handleNextPage} {...buttonStyle}>
           <ChevronRightIcon
             boxSize={50}
             cursor="pointer"
@@ -42,7 +51,7 @@ export default function Pagination({ handlePrevPage, handleNextPage }) {
             onMouseEnter={handleMouseEnterRight}
             onMouseLeave={handleMouseLeaveRight}
           />
-        </Button>
+        </Link>
       )}
     </Box>
   );
