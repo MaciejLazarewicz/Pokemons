@@ -1,16 +1,17 @@
-import { Box, Card, CardBody, Image,Button, useColorMode } from "@chakra-ui/react"
+import {
+  Box,
+  Card,
+  CardBody,
+  Image,
+  Button,
+  useColorMode,
+} from '@chakra-ui/react';
 
-import { useHover } from "./variables/hovered";
-
-
-
-
-
+import { useHover } from './variables/hovered';
 
 const PokemonThumb = ({ id, name, image, type }) => {
+  const { isHovered, handleMouseEnter, handleMouseLeave } = useHover();
 
-  const { isHovered, handleMouseEnter, handleMouseLeave } = useHover()
-  
   const typeColors = {
     ground: '#945151',
     ghost: '#F7F7F7',
@@ -30,15 +31,11 @@ const PokemonThumb = ({ id, name, image, type }) => {
     dark: '#0099A9',
     steel: '#B9BCBF',
   };
-  const backgroundColor = typeColors[type]
-  
-  
-    
+  const backgroundColor = typeColors[type];
 
-  
   return (
-    <Box height="350px" display="flex" mt={8}>
-      <Card bgColor="#FFFFFF" borderRadius="5%" >
+    <Box height="350px" display="flex" mt={8} width="100%">
+      <Card bgColor="#FFFFFF" borderRadius="5%" width="100%">
         <CardBody>
           <Box
             onMouseEnter={handleMouseEnter}
@@ -48,13 +45,7 @@ const PokemonThumb = ({ id, name, image, type }) => {
               backgroundColor: isHovered ? '#F6F6F6' : 'inherit',
             }}
           >
-            <Image
-              pt={20}
-              width="400px"
-              height="150px"
-              src={image}
-              alt={name}
-            />
+            <Image pt={20} width="100%" height="150px" src={image} alt={name} />
 
             <Box
               display="flex"
@@ -79,7 +70,6 @@ const PokemonThumb = ({ id, name, image, type }) => {
               mb={50}
               fontSize={20}
               bgColor={backgroundColor}
-             
               width="100px"
               height="50px"
               borderRadius="20%"
@@ -91,6 +81,6 @@ const PokemonThumb = ({ id, name, image, type }) => {
       </Card>
     </Box>
   );
-}
+};
 
-export default PokemonThumb
+export default PokemonThumb;
