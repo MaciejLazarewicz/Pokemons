@@ -68,10 +68,7 @@ function App() {
 
 
 
-  return (
-    <Box display="flex" flexDir="column" gap={20} bgColor=" #F3F3F3">
-      <Header/>
-
+  
 
     useEffect(() => {
       getAllPokemons(currentPage);
@@ -130,6 +127,7 @@ function App() {
       </Box>
     );
   }
+      
 
 
 export default App
