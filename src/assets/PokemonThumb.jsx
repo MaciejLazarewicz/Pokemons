@@ -1,9 +1,9 @@
-import { Box, Card, CardBody, Image, Button } from '@chakra-ui/react';
+import { Box, Card, CardBody, Image, Button } from '@chakra-ui/react'
 
-import { useHover } from './variables/hovered';
+import { useHover } from './variables/hovered'
 
 const PokemonThumb = ({ id, name, image, type }) => {
-  const { isHovered, handleMouseEnter, handleMouseLeave } = useHover();
+  const { isHovered, handleMouseEnter, handleMouseLeave } = useHover()
 
   const typeColors = {
     ground: '#945151',
@@ -22,9 +22,9 @@ const PokemonThumb = ({ id, name, image, type }) => {
     ice: '#E0F1FD',
     dragon: '#88A3D4',
     dark: '#0099A9',
-    steel: '#B9BCBF',
-  };
-  const backgroundColor = typeColors[type];
+    steel: '#B9BCBF'
+  }
+  const backgroundColor = typeColors[type]
 
   return (
     <Box height="350px" display="flex" mt={8}>
@@ -35,16 +35,9 @@ const PokemonThumb = ({ id, name, image, type }) => {
             onMouseLeave={handleMouseLeave}
             cursor="pointer"
             style={{
-              backgroundColor: isHovered ? '#F6F6F6' : 'inherit',
-            }}
-          >
-            <Image
-              pt={20}
-              width="300px"
-              height="150px"
-              src={image}
-              alt={name}
-            />
+              backgroundColor: isHovered ? '#F6F6F6' : 'inherit'
+            }}>
+            <Image pt={20} width="300px" height="150px" src={image} alt={name} />
 
             <Box
               display="flex"
@@ -53,8 +46,7 @@ const PokemonThumb = ({ id, name, image, type }) => {
               gap={40}
               fontSize={30}
               color="#202020"
-              textTransform="capitalize"
-            >
+              textTransform="capitalize">
               <p>{name}</p>
               <small>#0{id}</small>
             </Box>
@@ -71,15 +63,14 @@ const PokemonThumb = ({ id, name, image, type }) => {
               bgColor={backgroundColor}
               width="100px"
               height="50px"
-              borderRadius="20%"
-            >
+              borderRadius="20%">
               {type}
             </Button>
           </Box>
         </CardBody>
       </Card>
     </Box>
-  );
-};
+  )
+}
 
-export default PokemonThumb;
+export default PokemonThumb

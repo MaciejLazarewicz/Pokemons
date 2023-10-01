@@ -1,25 +1,10 @@
-import {
-  Heading,
-  Box,
-  Stack,
-  Link
- 
-} from '@chakra-ui/react';
+import { Heading, Box, Stack, Link } from '@chakra-ui/react'
 
-
-import NavButton from './Navigation';
-
-
+import NavButton from './Navigation'
 
 function Header() {
   return (
-    <Box
-      display="flex"
-      bgColor="#F50057"
-      justifyContent="space-between"
-      width="100%"
-      ml={0}
-    >
+    <Box display="flex" bgColor="#F50057" justifyContent="space-between" width="100%" ml={0}>
       <Box ml={26}>
         <Link href="https://www.pokemon.com/us/pokedex" textDecoration="none">
           <Heading as="h2" fontSize={36} color="#ffffff">
@@ -33,11 +18,7 @@ function Header() {
         </Box>
       </Stack>
     </Box>
-  );
+  )
 }
 
-
-export default Header;
-
-
-
+export default Header

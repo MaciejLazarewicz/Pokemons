@@ -1,22 +1,22 @@
-import { Box, Input } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Box, Input } from '@chakra-ui/react'
+import { useState } from 'react'
 
 function InputBar({ onSearch }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('')
 
   function handleEnterPress(event) {
     if (event.key === 'Enter') {
-      onSearch(searchTerm);
+      onSearch(searchTerm)
     }
   }
 
-  const [onClick, setOnClick] = useState(false);
+  const [onClick, setOnClick] = useState(false)
   const handleOnClick = () => {
-    setOnClick(true);
-  };
+    setOnClick(true)
+  }
   const onBlur = () => {
-    setOnClick(false);
-  };
+    setOnClick(false)
+  }
 
   return (
     <Box>
@@ -39,7 +39,7 @@ function InputBar({ onSearch }) {
         onKeyDown={handleEnterPress}
       />
     </Box>
-  );
+  )
 }
 
-export default InputBar;
+export default InputBar
