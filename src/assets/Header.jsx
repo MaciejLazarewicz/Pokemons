@@ -15,7 +15,7 @@ function Header() {
   return (
     <Box
       display="flex"
-      bgColor="#F50057"
+      bgColor="#412341"
       justifyContent="space-between"
       width="100%"
       ml={0}
