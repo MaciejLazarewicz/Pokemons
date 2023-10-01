@@ -20,6 +20,7 @@ function InputBar({ onSearch }) {
 
   return (
     <Box>
+      {/* Za dużo propsów tu jest, jeśli musi być tak dużo to te style powinny być wyciągnięte. W chakrze masz coś takiego jak prop sx do którego możesz przekazać obiekt ze stylami zamiast propów */}
       <Input
         border="none"
         bgColor="#DDDDDD"

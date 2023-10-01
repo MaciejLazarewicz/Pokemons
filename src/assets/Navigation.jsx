@@ -1,4 +1,3 @@
-
 import {
   Button,
   Box,
@@ -10,25 +9,20 @@ import {
   DrawerCloseButton,
 } from '@chakra-ui/react';
 import { HamburgerIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { useState } from 'react'
+import { useState } from 'react';
 import React from 'react';
 
-
 function NavButton() {
-
-
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
   const handleMouseLeave = () => {
     setIsHovered(false);
-  }
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
-  
-    
-  
+  };
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
+
   return (
     <Box
       mr={24}
@@ -37,7 +31,6 @@ function NavButton() {
       alignItems="center"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      
     >
       <Drawer
         isOpen={isOpen}
@@ -60,7 +53,6 @@ function NavButton() {
               alignItems="start"
               borderStyle="none"
               bgColor="inherit"
-              
             >
               <ChevronRightIcon
                 boxSize={60}
@@ -69,7 +61,6 @@ function NavButton() {
                 transition="background-color 1s ease"
                 borderRadius="60%"
                 cursor="pointer"
-                
               />
             </DrawerCloseButton>
           </Box>
@@ -114,7 +105,7 @@ function NavButton() {
                   fontSize="inherit"
                   fontWeight="inherit"
                   borderStyle="none"
-                  cursor='pointer'
+                  cursor="pointer"
                 >
                   Pokemon
                 </Button>
@@ -141,6 +132,3 @@ function NavButton() {
 }
 
 export default NavButton;
-
-
-
