@@ -11,7 +11,20 @@ import NavButton from './Navigation';
 
 
 
+
 function Header() {
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  }
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  }
+    
+
+
+
+
   return (
     <Box
       display="flex"
