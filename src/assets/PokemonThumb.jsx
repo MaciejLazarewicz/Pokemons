@@ -34,6 +34,7 @@ const PokemonThumb = ({ id, name, image, type }) => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             cursor="pointer"
+            // zamiast natywnego style możesz użyć sx propa https://chakra-ui.com/docs/styled-system/style-props#pseudo
             style={{
               backgroundColor: isHovered ? '#F6F6F6' : 'inherit',
             }}

@@ -4,12 +4,7 @@ import { useHover } from './variables/hovered';
 
 import { Link } from 'react-router-dom';
 
-
-
-
-
 export default function Pagination({ handlePrevPage, handleNextPage }) {
- 
   const {
     isHovered: isHoveredLeft,
     handleMouseEnter: handleMouseEnterLeft,
@@ -25,7 +20,6 @@ export default function Pagination({ handlePrevPage, handleNextPage }) {
     border: 'none',
     bgcolor: 'inherit',
   };
-  
 
   return (
     <Box display="flex">
@@ -34,6 +28,8 @@ export default function Pagination({ handlePrevPage, handleNextPage }) {
           <ChevronLeftIcon
             boxSize={50}
             cursor="pointer"
+            // zamiast używać js to możesz użyć cssa https://chakra-ui.com/docs/styled-system/style-props#pseudo
+            // wtedy cały hook jest niepotrzebny i załatwiasz całość cssem
             color={isHoveredLeft ? '#F50057' : '#0D131A'}
             onMouseEnter={handleMouseEnterLeft}
             onMouseLeave={handleMouseLeaveLeft}
@@ -43,10 +39,11 @@ export default function Pagination({ handlePrevPage, handleNextPage }) {
       )}
 
       {handleNextPage && (
-        <Link  onClick={handleNextPage} {...buttonStyle}>
+        <Link onClick={handleNextPage} {...buttonStyle}>
           <ChevronRightIcon
             boxSize={50}
             cursor="pointer"
+            // to samo tu
             color={isHoveredRight ? '#F50057' : '#0D131A'}
             onMouseEnter={handleMouseEnterRight}
             onMouseLeave={handleMouseLeaveRight}

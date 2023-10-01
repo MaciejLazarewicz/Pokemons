@@ -1,19 +1,11 @@
-import { Box,Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import InputBar from './assets/Input';
 import { useEffect, useState } from 'react';
 import PokemonThumb from './assets/PokemonThumb';
 
 import Pagination from './assets/Pagination';
 import Header from './assets/Header';
-import { Link,Router } from 'react-router-dom';
-
-
-
-
-
-
-
-
+import { Link, Router } from 'react-router-dom';
 
 function App() {
   const [allPokemons, setAllPokemons] = useState([]);
@@ -24,24 +16,17 @@ function App() {
 
   const [prevPage, setPrevPage] = useState([]);
 
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const [randomPokemon, setRandomPokemon] = useState(null)
-
-  
-
-
-
-
-
+  const [randomPokemon, setRandomPokemon] = useState(null);
 
   const getAllPokemons = async (url) => {
-    const res = await fetch(url)
-    
-    const data = await res.json()
+    const res = await fetch(url);
+
+    const data = await res.json();
 
     setAllPokemons([]);
-   
+
     setCurrentPage(data.next);
     setPrevPage(data.previous);
 
@@ -50,72 +35,54 @@ function App() {
     }
 
     console.log(allPokemons);
-  }
-
-    const createPokemonObject = async (results) => {
-      const pokemonList = [];
-      for (const pokemon of results) {
-        const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-        );
-
-      
-
-        const data = await res.json();
-        pokemonList.push(data);
-      }
-      
-      setAllPokemons((currentList) => [...currentList, ...pokemonList]);
-
-
-      
-      
   };
-  
 
+  const createPokemonObject = async (results) => {
+    const pokemonList = [];
+    for (const pokemon of results) {
+      const res = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+      );
 
-  
-    const handleNextPage = () => {
-      getAllPokemons(currentPage)
-        
-    };
-    const handlePrevPage = () => {
-      getAllPokemons(prevPage);
-    };
-
-
-
-  
-
-
-    useEffect(() => {
-      getAllPokemons(currentPage);
-    }, []);
-      
-    const handleSearch = async (searchTerm) => {
-      setCurrentPage('https://pokeapi.co/api/v2/pokemon?limit=20');
-      setAllPokemons([]);
-      if (searchTerm.trim() !== '') {
-        const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${searchTerm.toLowerCase()}`
-        );
-        if (res.ok) {
-          const data = await res.json();
-          setAllPokemons([data]);
-        }
-      } else {
-        await getAllPokemons(currentPage);
-      }
-    
+      const data = await res.json();
+      pokemonList.push(data);
     }
-      
-  
-  
+
+    setAllPokemons((currentList) => [...currentList, ...pokemonList]);
+  };
+
+  const handleNextPage = () => {
+    getAllPokemons(currentPage);
+  };
+  const handlePrevPage = () => {
+    getAllPokemons(prevPage);
+  };
+
+  useEffect(() => {
+    getAllPokemons(currentPage);
+  }, []);
+
+  const handleSearch = async (searchTerm) => {
+    setCurrentPage('https://pokeapi.co/api/v2/pokemon?limit=20');
+    setAllPokemons([]);
+    if (searchTerm.trim() !== '') {
+      const res = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${searchTerm.toLowerCase()}`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        setAllPokemons([data]);
+      }
+    } else {
+      await getAllPokemons(currentPage);
+    }
+  };
+
   const handleRandomPokemon = async () => {
     try {
       setLoading(true);
-      await getAllPokemons(currentPage)
-      const maxIndex = allPokemons.length
+      await getAllPokemons(currentPage);
+      const maxIndex = allPokemons.length;
       const randomIndex = Math.floor(Math.random() * maxIndex);
       const randomPokemonData = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${allPokemons[randomIndex].name}`
@@ -127,9 +94,6 @@ function App() {
       setLoading(false);
     }
   };
-      
-      
-      
 
   return (
     <Box display="flex" gap={20} bgColor="#fff" flexDir="column">
@@ -166,7 +130,7 @@ function App() {
           </Box>
         )}
         <Box display="flex" justifyContent="center">
-          <Link to="/" onClick={handleRandomPokemon} >
+          <Link to="/" onClick={handleRandomPokemon}>
             Random Pokemon
           </Link>
         </Box>
@@ -191,7 +155,6 @@ function App() {
       </Box>
     </Box>
   );
-  }
+}
 
-
-export default App
+export default App;
