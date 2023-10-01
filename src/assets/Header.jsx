@@ -19,7 +19,6 @@ function Header() {
       justifyContent="space-between"
       width="100%"
       ml={0}
-      
     >
       <Box ml={26}>
         <Link href="https://www.pokemon.com/us/pokedex" textDecoration="none">
