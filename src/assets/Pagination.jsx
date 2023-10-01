@@ -1,3 +1,4 @@
+
 import { Button } from "@chakra-ui/react"
 
 export default function Pagination() {
@@ -11,3 +12,4 @@ export default function Pagination() {
     </div>
   )
 }
+
