@@ -66,7 +66,12 @@ function App() {
       getAllPokemons(prevPage);
     };
 
-    allPokemons.sort((a, b) => (a.id > b.id ? 1 : -1));
+
+
+  return (
+    <Box display="flex" flexDir="column" gap={20} bgColor=" #F3F3F3">
+      <Header/>
+
 
     useEffect(() => {
       getAllPokemons(currentPage);
