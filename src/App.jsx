@@ -1,20 +1,47 @@
 import { Box, Button } from '@chakra-ui/react'
-import InputBar from './assets/Input'
 import { useEffect, useState } from 'react'
-import PokemonThumb from './assets/PokemonThumb'
 
-import Pagination from './assets/Pagination'
-import Header from './assets/Header'
-import { Link, Router } from 'react-router-dom'
+import Header from './components/Header'
+import InputBar from './components/Input'
+import Pagination from './components/Pagination'
+import PokemonThumb from './components/PokemonThumb'
+
+// Tu masz taki przykład najprostszego useFetcha, który możesz sobie rozwinąć
+const useFetch = () => {
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+
+  const fetchData = (url) => {
+    setData([])
+    setIsLoading(true)
+    // Pod fetcha spoko sprawdza się ten zapis z .then bo wtedy obsługujesz sobie tego res.json czytelniej jako nowy callback
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setIsLoading(false)
+      })
+      .catch(() => {
+        setData([])
+        setIsError(true)
+        setIsLoading(false)
+      })
+  }
+
+  return { data, isLoading, isError, fetchData }
+}
 
 function App() {
+  // Cała logika z fetchem powinna być w hooku, a nie w komponencie
   const [allPokemons, setAllPokemons] = useState([])
 
   const [currentPage, setCurrentPage] = useState('https://pokeapi.co/api/v2/pokemon?limit=20')
 
   const [prevPage, setPrevPage] = useState([])
 
-  const [loading, setLoading] = useState(false)
+  // booleany mają przedrostek is np. isLoading
+  const [isLoading, setIsLoading] = useState(false)
 
   const [randomPokemon, setRandomPokemon] = useState(null)
 
@@ -31,8 +58,6 @@ function App() {
     if (data.results.length > 0) {
       await createPokemonObject(data.results)
     }
-
-    console.log(allPokemons)
   }
 
   const createPokemonObject = async (results) => {
@@ -58,6 +83,7 @@ function App() {
     getAllPokemons(currentPage)
   }, [])
 
+  // najlepiej zeby to było w osobnym hooku
   const handleSearch = async (searchTerm) => {
     setCurrentPage('https://pokeapi.co/api/v2/pokemon?limit=20')
     setAllPokemons([])
@@ -72,9 +98,10 @@ function App() {
     }
   }
 
+  // to też osobny hook
   const handleRandomPokemon = async () => {
     try {
-      setLoading(true)
+      setIsLoading(true)
       await getAllPokemons(currentPage)
       const maxIndex = allPokemons.length
       const randomIndex = Math.floor(Math.random() * maxIndex)
@@ -85,10 +112,13 @@ function App() {
     } catch (error) {
       console.error('Error fetching random Pokemon:', error)
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
+  // A to wszystko po to, żeby komponenty były dumb i nie miały logiki, a tylko renderowały
+  // wtedy jest je łatwo testować i utrzymywać bo cała logika jest w hookach
+  // a komponenty są tylko funkcjami, które przyjmują propsy i renderują
   return (
     <Box display="flex" gap={20} bgColor="#fff" flexDir="column">
       <Header />
@@ -119,9 +149,13 @@ function App() {
           </Box>
         )}
         <Box display="flex" justifyContent="center">
-          <Link to="/" onClick={handleRandomPokemon}>
+          {/* Czemu handlujesz tu nową stronę? Wystarczyłby button z onClickiem */}
+          {/* <Link to="/" onClick={handleRandomPokemon}>
             Random Pokemon
-          </Link>
+          </Link> */}
+          <Button onClick={handleRandomPokemon}>Random Pokemon</Button>
+          {/* Dobra.. masz tu powaloną logikę i wczytujesz też następną stronę 😅 */}
+          {/* jak chcesz random pokemona, to powinieneś mieć nowego fetcha, który będzie randomowo rzucał do API zapytanie o jednego pokemona, bo teraz przeładowujesz całą stronę tym onClickiem */}
         </Box>
       </Box>
 
@@ -131,13 +165,15 @@ function App() {
         justifyItems="center"
         width="100%"
         gap="24px">
-        {allPokemons.map((pokemon, index) => (
+        {/* Zawsze staraj się jak najbardziej wyciągnąć rzeczy z obiektu, żeby nie przekazywać po kropce długich ciągów obiektów */}
+        {allPokemons.map(({ id, sprites, name, types }) => (
           <PokemonThumb
-            key={index}
-            id={pokemon.id}
-            image={pokemon.sprites.other.dream_world.front_default}
-            name={pokemon.name}
-            type={pokemon.types[0].type.name}
+            // klucz to nigdy nie powinien być index, chyba że będzie nieklikalny
+            key={id}
+            id={id}
+            image={sprites.other.dream_world.front_default}
+            name={name}
+            type={types[0].type.name}
           />
         ))}
       </Box>

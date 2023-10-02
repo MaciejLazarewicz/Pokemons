@@ -9,53 +9,66 @@ import {
   DrawerCloseButton
 } from '@chakra-ui/react'
 import { HamburgerIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
 import React from 'react'
+import CustomLink from './CustomLink'
+
+// Jeśli powtarzasz jakiś kolor to do theme, albo chociaż wyciągasz go ponad komponent. Wtedy zmiana zachodzi w jednym miejscu, a nie 2-3 albo i 10
+const BG_HOVER = 'RGBA(0, 0, 0, 0.06)'
+const COMMON_BORDER = '1px solid #D5D5D5'
+
+const customLinkStyles = {
+  borderStyle: 'none',
+  bgColor: 'inherit',
+  cursor: 'pointer',
+  textDecoration: 'none',
+  color: 'inherit'
+}
+
+// Bardzo ważna sprawa, jak masz powtarzające się style to tworzysz albo obiekt albo cały komponent z nimi i go po prostu reużywasz, zamiast kopiować te style
+// To samo tyczy się funkcji, jak masz powtarzające się funkcje to je wyciągasz i używasz w wielu miejscach
+// Robisz tak dlatego, że po pierwsze masz wtedy jedno miejsce do zmiany zamiast 10, a po drugie jest to szybsze dla silnika js, bo on ma w pamięci już ten komponent / funkcję, a nie tworzy go za każdym razem od 0
 
 function NavButton() {
-  const [isHovered, setIsHovered] = useState(false)
-  const handleMouseEnter = () => {
-    setIsHovered(true)
-  }
-  const handleMouseLeave = () => {
-    setIsHovered(false)
-  }
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
 
   return (
-    <Box
-      mr={24}
-      mt={10}
-      display="flex"
-      alignItems="center"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}>
+    <Box mr={24} mt={10} display="flex" alignItems="center">
       <Drawer isOpen={isOpen} placement={'right'} onClose={onClose} finalFocusRef={btnRef}>
+        {/* Style do wrzucenia w obiekt */}
         <DrawerContent
+          // Chakra też ma swoje wielkości określone. Możesz używać ich zamiast px, albo je zupełnie nadpisać w theme
           maxWidth="300px"
           flexDirection="column"
           bgColor="#F3F3F3"
           gap={24}
           fontSize={24}
           fontWeight="500"
-          borderLeft="1px solid #D5D5D5">
+          borderLeft={COMMON_BORDER}>
           <Box>
             <DrawerCloseButton mt={14} alignItems="start" borderStyle="none" bgColor="inherit">
+              {/* Style do wrzucenia w obiekt */}
               <ChevronRightIcon
                 boxSize={60}
                 color="#718096"
-                bgColor={isHovered ? 'RGBA(0, 0, 0, 0.06)' : 'inherit'}
+                bgColor="inherit"
                 transition="background-color 1s ease"
                 borderRadius="60%"
                 cursor="pointer"
+                // Zamiast używać useHover to wystarczy tu css hover
+                _hover={{ bgColor: BG_HOVER }}
               />
             </DrawerCloseButton>
           </Box>
           <Box>
+            {/* Style do wrzucenia w obiekt */}
             <Box
-              borderTop="1px solid #D5D5D5"
-              borderBottom="1px solid #D5D5D5"
+              // zamiast
+              // borderTop="1px solid #D5D5D5"
+              // borderBottom="1px solid #D5D5D5"
+              // to
+              borderTop={COMMON_BORDER}
+              borderBottom={COMMON_BORDER}
               width="100%"
               display="flex"
               alignItems="center"
@@ -64,19 +77,15 @@ function NavButton() {
               pt={24}
               pb={24}>
               <DrawerBody>
-                <Link
-                  borderStyle="none"
-                  bgColor="inherit"
-                  cursor="pointer"
-                  href=""
-                  textDecoration="none"
-                  color="inherit">
+                {/* Style do wrzucenia w obiekt i użycie custom linka */}
+                <CustomLink customStyles={customLinkStyles} href="/">
                   Home
-                </Link>
+                </CustomLink>
               </DrawerBody>
             </Box>
+            {/* Style do wrzucenia w obiekt */}
             <Box
-              borderBottom="1px solid #D5D5D5"
+              borderBottom={COMMON_BORDER}
               width="100%"
               display="flex"
               alignItems="center"
@@ -94,13 +103,16 @@ function NavButton() {
         </DrawerContent>
       </Drawer>
 
+      {/* Style do wrzucenia w obiekt */}
       <Button
         ref={btnRef}
         onClick={onOpen}
         cursor="pointer "
         borderStyle="none"
         boxSize={72}
-        bgColor={isHovered ? 'RGBA(0, 0, 0, 0.06)' : 'inherit'}
+        bgColor="inherit"
+        // Zamiast używać useHover to wystarczy tu css hover
+        _hover={{ bgColor: BG_HOVER }}
         borderRadius="60%"
         transition="background-color 0.5s ease">
         <HamburgerIcon boxSize={48} color="#fff" />
