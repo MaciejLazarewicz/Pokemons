@@ -1,33 +1,34 @@
 import { Box, Card, CardBody, Image, Button } from '@chakra-ui/react'
 
-import { useHover } from './variables/hovered'
+import { useHover } from './hooks/useHover'
+
+export const typeColors = {
+  ground: '#945151',
+  ghost: '#F7F7F7',
+  electric: '#FFFFA1',
+  bug: '#F6D6A7',
+  poison: '#e0a7f6',
+  normal: '#e0a7f6',
+  fairy: '#FFC9D2',
+  fire: '#E41717',
+  grass: '#E2F9E1',
+  water: '#00B8EE',
+  psychic: '#F0F0F0',
+  fighting: '#B0D3DA',
+  rock: '#717069',
+  ice: '#E0F1FD',
+  dragon: '#88A3D4',
+  dark: '#0099A9',
+  steel: '#B9BCBF'
+}
 
 const PokemonThumb = ({ id, name, image, type }) => {
   const { isHovered, handleMouseEnter, handleMouseLeave } = useHover()
 
-  const typeColors = {
-    ground: '#945151',
-    ghost: '#F7F7F7',
-    electric: '#FFFFA1',
-    bug: '#F6D6A7',
-    poison: '#e0a7f6',
-    normal: '#e0a7f6',
-    fairy: '#FFC9D2',
-    fire: '#E41717',
-    grass: '#E2F9E1',
-    water: '#00B8EE',
-    psychic: '#F0F0F0',
-    fighting: '#B0D3DA',
-    rock: '#717069',
-    ice: '#E0F1FD',
-    dragon: '#88A3D4',
-    dark: '#0099A9',
-    steel: '#B9BCBF'
-  }
   const backgroundColor = typeColors[type]
 
   return (
-    <Box height="350px" display="flex" mt={8}>
+    <Box height="350px" display="flex" mt={8} boxShadow="0 0 10px rgba(0, 0, 0, 0.3)">
       <Card bgColor="#FFFFFF" borderRadius="5%">
         <CardBody>
           <Box
