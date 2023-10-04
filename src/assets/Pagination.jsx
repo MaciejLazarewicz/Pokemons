@@ -1,52 +1,45 @@
 import { Box } from '@chakra-ui/react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { useHover } from './variables/hovered'
 
-import { Link } from 'react-router-dom'
+import CustomLink from './CustomLink'
 
-export default function Pagination({ handlePrevPage, handleNextPage }) {
-  const {
-    isHovered: isHoveredLeft,
-    handleMouseEnter: handleMouseEnterLeft,
-    handleMouseLeave: handleMouseLeaveLeft
-  } = useHover()
-  const {
-    isHovered: isHoveredRight,
-    handleMouseEnter: handleMouseEnterRight,
-    handleMouseLeave: handleMouseLeaveRight
-  } = useHover()
+function Pagination({ handlePrevPage, handleNextPage }) {
+  const chevronCommonStyles = {
+    boxSize: 50,
+    cursor: 'pointer',
+    color: '#0D131A',
+    _hover: { color: '#F50057' }
+  }
 
   const buttonStyle = {
     border: 'none',
     bgcolor: 'inherit'
   }
 
+  const handlePrevClick = (e) => {
+    e.preventDefault()
+    handlePrevPage()
+  }
+  const handleNextClick = (e) => {
+    e.preventDefault()
+    handleNextPage()
+    console.log('Handling previous click')
+  }
+
   return (
     <Box display="flex">
       {handlePrevPage && (
-        <Link {...buttonStyle}>
-          <ChevronLeftIcon
-            boxSize={50}
-            cursor="pointer"
-            color={isHoveredLeft ? '#F50057' : '#0D131A'}
-            onMouseEnter={handleMouseEnterLeft}
-            onMouseLeave={handleMouseLeaveLeft}
-            onClick={handlePrevPage}
-          />
-        </Link>
+        <CustomLink {...buttonStyle}>
+          <ChevronLeftIcon sx={chevronCommonStyles} onClick={handlePrevClick} />
+        </CustomLink>
       )}
 
       {handleNextPage && (
-        <Link onClick={handleNextPage} {...buttonStyle}>
-          <ChevronRightIcon
-            boxSize={50}
-            cursor="pointer"
-            color={isHoveredRight ? '#F50057' : '#0D131A'}
-            onMouseEnter={handleMouseEnterRight}
-            onMouseLeave={handleMouseLeaveRight}
-          />
-        </Link>
+        <CustomLink {...buttonStyle}>
+          <ChevronRightIcon sx={chevronCommonStyles} onClick={handleNextClick} />
+        </CustomLink>
       )}
     </Box>
   )
 }
+export default Pagination

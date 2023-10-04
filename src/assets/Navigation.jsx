@@ -9,19 +9,41 @@ import {
   DrawerCloseButton
 } from '@chakra-ui/react'
 import { HamburgerIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { useState } from 'react'
-import React from 'react'
 
-function NavButton() {
-  const [isHovered, setIsHovered] = useState(false)
-  const handleMouseEnter = () => {
-    setIsHovered(true)
-  }
-  const handleMouseLeave = () => {
-    setIsHovered(false)
-  }
+import React, { useState } from 'react'
+
+import RandomPokemon from './RandomPokemon'
+
+function NavButton({ handleMouseEnter, handleMouseLeave }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+
+  const BG_HOVER = 'RGBA(0, 0, 0, 0.06)'
+  const COMMON_BORDER = '1px solid #D5D5D5'
+  const COMMON_BOX_STYLES = {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    pt: '20px',
+    pb: '20px'
+  }
+
+  const customLinkStyles = {
+    borderStyle: 'none',
+    bgColor: 'inherit',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    color: ' inherit'
+  }
+
+  const customButtonStyles = {
+    fontSize: 'inherit',
+    fontWeight: 'inherit',
+    borderStyle: 'inherit',
+    cursor: 'pointer',
+    bgColor: 'inherit'
+  }
 
   return (
     <Box
@@ -45,7 +67,7 @@ function NavButton() {
               <ChevronRightIcon
                 boxSize={60}
                 color="#718096"
-                bgColor={isHovered ? 'RGBA(0, 0, 0, 0.06)' : 'inherit'}
+                _hover={{ bgColor: BG_HOVER }}
                 transition="background-color 1s ease"
                 borderRadius="60%"
                 cursor="pointer"
@@ -53,41 +75,21 @@ function NavButton() {
             </DrawerCloseButton>
           </Box>
           <Box>
-            <Box
-              borderTop="1px solid #D5D5D5"
-              borderBottom="1px solid #D5D5D5"
-              width="100%"
-              display="flex"
-              alignItems="center"
-              flexDirection="column"
-              gap={24}
-              pt={24}
-              pb={24}>
+            <Box borderTop={COMMON_BORDER} borderBottom={COMMON_BORDER} {...COMMON_BOX_STYLES}>
               <DrawerBody>
-                <Link
-                  borderStyle="none"
-                  bgColor="inherit"
-                  cursor="pointer"
-                  href=""
-                  textDecoration="none"
-                  color="inherit">
+                <Link href="" {...customLinkStyles}>
                   Home
                 </Link>
               </DrawerBody>
             </Box>
-            <Box
-              borderBottom="1px solid #D5D5D5"
-              width="100%"
-              display="flex"
-              alignItems="center"
-              flexDirection="column"
-              gap={24}
-              pt={24}
-              pb={24}>
+            <Box {...COMMON_BOX_STYLES} borderBottom={COMMON_BORDER}>
               <DrawerBody>
-                <Button fontSize="inherit" fontWeight="inherit" borderStyle="none" cursor="pointer">
-                  Pokemon
-                </Button>
+                <Button {...customButtonStyles}>Pokemon</Button>
+              </DrawerBody>
+            </Box>
+            <Box borderBottom={COMMON_BORDER} {...COMMON_BOX_STYLES}>
+              <DrawerBody>
+                <Button {...customButtonStyles}>Random Pokemon!</Button>
               </DrawerBody>
             </Box>
           </Box>
@@ -100,8 +102,9 @@ function NavButton() {
         cursor="pointer "
         borderStyle="none"
         boxSize={72}
-        bgColor={isHovered ? 'RGBA(0, 0, 0, 0.06)' : 'inherit'}
         borderRadius="60%"
+        bgColor="inherit"
+        _hover={{ bgColor: BG_HOVER }}
         transition="background-color 0.5s ease">
         <HamburgerIcon boxSize={48} color="#fff" />
       </Button>
