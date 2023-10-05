@@ -6,6 +6,7 @@ import { Box } from '@chakra-ui/react'
 const PokemonList = () => {
   const { id } = useParams()
   const [pokemonData, setPokemonData] = useState(null)
+  const [speciesData, setSpeciesData] = useState(null)
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -26,8 +27,27 @@ const PokemonList = () => {
 
     fetchPokemonData()
   }, [id])
+  useEffect(() => {
+    const fetchSpeciesData = async () => {
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
 
-  if (!pokemonData) {
+        const data = await response.json()
+        console.log('Fetched Berry Data:', data)
+
+        setSpeciesData(data)
+      } catch (error) {
+        console.error('Error fetching Berry Data:', error)
+      }
+    }
+
+    fetchSpeciesData()
+  }, [id])
+
+  if (!pokemonData || !speciesData) {
     return <div>Loading...</div>
   }
 
@@ -47,6 +67,7 @@ const PokemonList = () => {
         height={pokemonData.height}
         weight={pokemonData.weight}
         ability={pokemonData.abilities[0].ability.name}
+        text={speciesData.flavor_text_entries[0].flavor_text}
       />
     </Box>
   )

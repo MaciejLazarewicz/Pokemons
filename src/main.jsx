@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import React from 'react'
 import PokemonList from './assets/PokemonList.jsx'
+import PokemonGenerator from './assets/pages/PokemonGenerator.jsx'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: '/PokemonList/:id',
     element: <PokemonList />
+  },
+  {
+    path: '/RandomPokemon',
+    element: <PokemonGenerator />
   }
 ])
 

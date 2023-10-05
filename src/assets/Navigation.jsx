@@ -4,15 +4,13 @@ import {
   useDisclosure,
   Drawer,
   DrawerBody,
-  Link,
   DrawerContent,
   DrawerCloseButton
 } from '@chakra-ui/react'
 import { HamburgerIcon, ChevronRightIcon } from '@chakra-ui/icons'
+import { Link } from 'react-router-dom'
 
-import React, { useState } from 'react'
-
-import RandomPokemon from './RandomPokemon'
+import React from 'react'
 
 function NavButton({ handleMouseEnter, handleMouseLeave }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -77,9 +75,9 @@ function NavButton({ handleMouseEnter, handleMouseLeave }) {
           <Box>
             <Box borderTop={COMMON_BORDER} borderBottom={COMMON_BORDER} {...COMMON_BOX_STYLES}>
               <DrawerBody>
-                <Link href="" {...customLinkStyles}>
+                <Button onClick={onClose} {...customLinkStyles}>
                   Home
-                </Link>
+                </Button>
               </DrawerBody>
             </Box>
             <Box {...COMMON_BOX_STYLES} borderBottom={COMMON_BORDER}>
@@ -89,7 +87,9 @@ function NavButton({ handleMouseEnter, handleMouseLeave }) {
             </Box>
             <Box borderBottom={COMMON_BORDER} {...COMMON_BOX_STYLES}>
               <DrawerBody>
-                <Button {...customButtonStyles}>Random Pokemon!</Button>
+                <Link to="/RandomPokemon" {...customButtonStyles}>
+                  Random Pokemon!
+                </Link>
               </DrawerBody>
             </Box>
           </Box>
