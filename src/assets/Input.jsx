@@ -1,7 +1,7 @@
 import { Box, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 
-function InputBar({ onSearch }) {
+export function InputBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
 
   function handleEnterPress(event) {

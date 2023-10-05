@@ -3,7 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 import CustomLink from './CustomLink'
 
-function Pagination({ handlePrevPage, handleNextPage }) {
+export function Pagination({ handlePrevPage, handleNextPage }) {
   const chevronCommonStyles = {
     boxSize: 50,
     cursor: 'pointer',
