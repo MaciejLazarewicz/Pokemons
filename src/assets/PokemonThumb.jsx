@@ -2,6 +2,8 @@ import { Box, Card, CardBody, Image, Button } from '@chakra-ui/react'
 
 import { useHover } from './hooks/useHover'
 
+import { Link } from 'react-router-dom'
+
 export const typeColors = {
   ground: '#945151',
   ghost: '#F7F7F7',
@@ -22,7 +24,7 @@ export const typeColors = {
   steel: '#B9BCBF'
 }
 
-const PokemonThumb = ({ id, name, image, type }) => {
+export const PokemonThumb = ({ id, name, image, type }) => {
   const { isHovered, handleMouseEnter, handleMouseLeave } = useHover()
 
   const backgroundColor = typeColors[type]
@@ -38,7 +40,9 @@ const PokemonThumb = ({ id, name, image, type }) => {
             style={{
               backgroundColor: isHovered ? '#F6F6F6' : 'inherit'
             }}>
-            <Image pt={20} width="300px" height="150px" src={image} alt={name} />
+            <Link to={`/PokemonList/${id}`}>
+              <Image pt={20} width="300px" height="150px" src={image} alt={name} />
+            </Link>
 
             <Box
               display="flex"
@@ -52,7 +56,6 @@ const PokemonThumb = ({ id, name, image, type }) => {
               <small>#0{id}</small>
             </Box>
           </Box>
-
           <Box display="flex" justifyContent="center">
             <Button
               textTransform="capitalize"
@@ -68,6 +71,7 @@ const PokemonThumb = ({ id, name, image, type }) => {
               {type}
             </Button>
           </Box>
+          <Box></Box>
         </CardBody>
       </Card>
     </Box>

@@ -2,7 +2,7 @@ import { Heading, Box, Stack, Link } from '@chakra-ui/react'
 
 import NavButton from './Navigation'
 
-function Header() {
+export function Header() {
   return (
     <Box display="flex" bgColor="#F50057" justifyContent="space-between" width="100%" ml={0}>
       <Box ml={26}>

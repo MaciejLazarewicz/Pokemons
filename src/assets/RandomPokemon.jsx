@@ -6,7 +6,7 @@ import { CloseIcon } from '@chakra-ui/icons'
 
 import { typeColors } from './PokemonThumb'
 
-const RandomPokemon = () => {
+export const RandomPokemon = () => {
   const [randomPokemon, setRandomPokemon] = useState(null)
 
   const fetchRandom = useCallback(async () => {

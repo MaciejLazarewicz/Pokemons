@@ -1,4 +1,4 @@
-const useSearch = async (
+export const useSearch = async (
   searchTerm,
   setCurrentPage,
   setAllPokemons,
