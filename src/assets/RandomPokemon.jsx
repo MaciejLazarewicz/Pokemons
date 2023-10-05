@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { Box } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 
 import { Link } from 'react-router-dom'
 import { CloseIcon } from '@chakra-ui/icons'
@@ -73,12 +73,23 @@ export const RandomPokemon = () => {
       {randomPokemon && (
         <Box>
           <Box display="flex" justifyContent="flex-end" mt={4} mr={4}>
-            <CloseIcon _hover={{ color: ICON_HOVER }} onClick={closeIconClick} />
+            <Link to="/">
+              <CloseIcon _hover={{ color: ICON_HOVER }} onClick={closeIconClick} />
+            </Link>
           </Box>
+
           <Box display="flex" flexDir="column" alignItems="center">
-            <img src={randomPokemon.image} alt={randomPokemon.name} width="150px" height="150px" />
+            <Link to={`/PokemonList/${randomPokemon.id}`}>
+              <img
+                src={randomPokemon.image}
+                alt={randomPokemon.name}
+                width="150px"
+                height="150px"
+              />
+            </Link>
 
             <p>{randomPokemon.name}</p>
+
             <Box display="flex" gap={10}>
               <p> {randomPokemon.type}</p>
               <p>#{randomPokemon.id}</p>
@@ -87,9 +98,7 @@ export const RandomPokemon = () => {
         </Box>
       )}
       <Box display="flex" justifyContent="center">
-        <Link to="/" onClick={buttonClick}>
-          Random Pokemon
-        </Link>
+        <Button onClick={buttonClick}>Random Pokemon</Button>
       </Box>
     </Box>
   )

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import PokemonThumb from '../PokemonThumb'
 import Pagination from '../Pagination'
 import Header from '../Header'
-import RandomPokemon from '../RandomPokemon'
 
 import useSearch from '../hooks/useSearch'
 
@@ -66,9 +65,6 @@ function Home() {
           useSearch(searchTerm, setCurrentPage, setAllPokemons, getAllPokemons)
         }
       />
-      <Box display="flex" justifyContent="center">
-        <RandomPokemon />
-      </Box>
 
       <Box display="flex" justifyContent="flex-end" mr={20}>
         <Pagination
