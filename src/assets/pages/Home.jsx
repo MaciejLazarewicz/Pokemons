@@ -1,9 +1,11 @@
-import { AlertDialog, Box } from '@chakra-ui/react'
+import { Box, Stack } from '@chakra-ui/react'
 import InputBar from '../Input'
 import { useEffect, useState } from 'react'
 import PokemonThumb from '../PokemonThumb'
 import Pagination from '../Pagination'
 import Header from '../Header'
+
+import SpinnerComponent from '../Spinner'
 
 import useSearch from '../hooks/useSearch'
 
@@ -16,21 +18,29 @@ function Home() {
 
   const [nextPage, setNextPage] = useState([])
 
+  const [isLoading, setIsLoading] = useState(true)
+
   const getAllPokemons = async (url) => {
-    const res = await fetch(url)
+    setIsLoading(true)
 
-    const data = await res.json()
-    setAllPokemons([])
+    try {
+      const res = await fetch(url)
+      const data = await res.json()
 
-    setNextPage(data.next)
+      setAllPokemons([])
 
-    setPrevPage(data.previous)
+      setNextPage(data.next)
+      setPrevPage(data.previous)
 
-    if (data.results.length > 0) {
-      await createPokemonObject(data.results)
+      if (data.results.length > 0) {
+        await createPokemonObject(data.results)
+      }
+
+      if (!res.ok) {
+      }
+    } finally {
+      setIsLoading(false)
     }
-
-    console.log(allPokemons)
   }
 
   const createPokemonObject = async (results) => {
@@ -55,6 +65,10 @@ function Home() {
   useEffect(() => {
     getAllPokemons(currentPage)
   }, [])
+
+  if (isLoading) {
+    return <SpinnerComponent />
+  }
 
   return (
     <Box display="flex" gap={20} flexDir="column" bgColor="#F3F3F3">
