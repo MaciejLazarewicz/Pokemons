@@ -1,13 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { Box, Button } from '@chakra-ui/react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
+import { Box, Button, Image, Text } from '@chakra-ui/react'
 
 import { Link } from 'react-router-dom'
-import { CloseIcon } from '@chakra-ui/icons'
+import { CloseIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 
 import { typeColors } from './PokemonThumb'
 
 export const RandomPokemon = () => {
   const [randomPokemon, setRandomPokemon] = useState(null)
+  const [isRotated, setIsRotated] = useState(false)
+  const btnRef = React.useRef()
 
   const fetchRandom = useCallback(async () => {
     try {
@@ -41,12 +43,19 @@ export const RandomPokemon = () => {
 
   const buttonClick = () => {
     fetchRandom()
+    setIsRotated(!isRotated)
   }
-  const closeIconClick = () => {
-    setRandomPokemon()
-  }
+  // const closeIconClick = () => {
+  //   setRandomPokemon()
+  // }
 
   const backgroundColor = randomPokemon ? typeColors[randomPokemon.type] : undefined
+
+  const buttonStyle = {
+    transform: isRotated ? 'rotate(180deg)' : 'none',
+    transition: 'transform 0.5s ease',
+    cursor: 'pointer'
+  }
 
   let ICON_HOVER = '#f50057'
   if (backgroundColor === '#E41717') {
@@ -60,45 +69,71 @@ export const RandomPokemon = () => {
   return (
     <Box
       display="flex"
-      width="200px"
-      cursor="pointer"
-      gap={10}
-      textTransform="capitalize"
-      flexDir="column"
-      bgColor={backgroundColor}
-      borderRadius="10px"
-      boxShadow="0 0 10px rgba(0, 0, 0, 1)"
-      fontSize="16px"
-      fontWeight="600">
-      {randomPokemon && (
-        <Box>
-          <Box display="flex" justifyContent="flex-end" mt={4} mr={4}>
-            <Link to="/">
-              <CloseIcon _hover={{ color: ICON_HOVER }} onClick={closeIconClick} />
-            </Link>
-          </Box>
+      backgroundImage="./PokeBackground.jpg"
+      backgroundSize="cover"
+      backgroundPosition="center"
+      height="100vh"
+      width="100vw">
+      <Box
+        display="flex"
+        width="200px"
+        height="370px"
+        cursor="pointer"
+        margin="auto"
+        gap={10}
+        textTransform="capitalize"
+        flexDir="column"
+        backgroundColor={backgroundColor}
+        borderRadius="10px"
+        boxShadow="0 0 10px rgba(0, 0, 0, 1)"
+        fontSize="16px"
+        fontWeight="600"
+        justifyContent="center">
+        {randomPokemon && (
+          <Box display="flex" flexDir="column">
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              m="10px"
+              color="#202020">
+              <Link to="/">
+                <ArrowLeftIcon _hover={{ color: ICON_HOVER }} boxSize="20px" color="#202020" />
+              </Link>
+              <Link onClick={btnRef} cursor="pointer" border="none">
+                <CloseIcon _hover={{ color: ICON_HOVER }} boxSize="20px" color="#202020" />
+              </Link>
+            </Box>
 
-          <Box display="flex" flexDir="column" alignItems="center">
-            <Link to={`/PokemonList/${randomPokemon.id}`}>
-              <img
-                src={randomPokemon.image}
-                alt={randomPokemon.name}
-                width="150px"
-                height="150px"
-              />
-            </Link>
+            <Box display="flex" flexDir="column" alignItems="center">
+              <Link to={`/PokemonList/${randomPokemon.id}`}>
+                <Image
+                  src={randomPokemon.image}
+                  alt={randomPokemon.name}
+                  width="150px"
+                  height="150px"
+                />
+              </Link>
 
-            <p>{randomPokemon.name}</p>
+              <Text>{randomPokemon.name}</Text>
 
-            <Box display="flex" gap={10}>
-              <p> {randomPokemon.type}</p>
-              <p>#{randomPokemon.id}</p>
+              <Box display="flex" gap={10}>
+                <Text> {randomPokemon.type}</Text>
+                <Text>#{randomPokemon.id}</Text>
+              </Box>
             </Box>
           </Box>
+        )}
+        <Box display="flex" justifyContent="center">
+          <Button
+            backgroundColor={backgroundColor}
+            border="none"
+            onClick={buttonClick}
+            style={buttonStyle}
+            background="transparent">
+            <Image src="./fight.png" alt="Pokeball" />
+          </Button>
         </Box>
-      )}
-      <Box display="flex" justifyContent="center">
-        <Button onClick={buttonClick}>Random Pokemon</Button>
       </Box>
     </Box>
   )
