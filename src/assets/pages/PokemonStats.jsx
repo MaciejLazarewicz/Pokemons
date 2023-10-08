@@ -17,7 +17,6 @@ export const PokemonStats = ({
   height,
   weight,
   ability,
-  gender,
   text
 }) => {
   const backgroundColor = typeColors[type]
@@ -113,9 +112,6 @@ export const PokemonStats = ({
             <Box>
               <Text m="5px" color="#F3F3E9">
                 Gender
-              </Text>
-              <Text m="5px" color="#F50065">
-                {gender}
               </Text>
             </Box>
           </Box>

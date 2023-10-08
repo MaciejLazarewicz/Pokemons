@@ -48,27 +48,27 @@ const PokemonList = () => {
 
     fetchSpeciesData()
   }, [id])
-  useEffect(() => {
-    const fetchGenderData = async () => {
-      try {
-        const response = await fetch(`https://pokeapi.co/api/v2/gender/${id}/`)
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
+  // useEffect(() => {
+  //   const fetchGenderData = async () => {
+  //     try {
+  //       const response = await fetch(`https://pokeapi.co/api/v2/gender/${id}/`)
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok')
+  //       }
 
-        const data = await response.json()
-        console.log('Fetched Berry Data:', data)
+  //       const data = await response.json()
+  //       console.log('Fetched Berry Data:', data)
 
-        setGenderData(data)
-      } catch (error) {
-        console.error('Error fetching Berry Data:', error)
-      }
-    }
+  //       setGenderData(data)
+  //     } catch (error) {
+  //       console.error('Error fetching Berry Data:', error)
+  //     }
+  //   }
 
-    fetchGenderData()
-  }, [id])
+  //   fetchGenderData()
+  // }, [id])
 
-  if (!pokemonData || !speciesData || !genderData) {
+  if (!pokemonData || !speciesData) {
     return <div>Loading...</div>
   }
 
@@ -89,7 +89,6 @@ const PokemonList = () => {
         weight={pokemonData.weight}
         ability={pokemonData.abilities[0].ability.name}
         text={speciesData.flavor_text_entries[0].flavor_text}
-        gender={genderData.name}
       />
     </Box>
   )
