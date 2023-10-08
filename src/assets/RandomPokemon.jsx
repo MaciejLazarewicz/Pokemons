@@ -10,6 +10,7 @@ export const RandomPokemon = () => {
   const [randomPokemon, setRandomPokemon] = useState(null)
   const [isRotated, setIsRotated] = useState(false)
   const btnRef = React.useRef()
+  const [shouldClose, setShouldClose] = useState(false)
 
   const fetchRandom = useCallback(async () => {
     try {
@@ -45,9 +46,28 @@ export const RandomPokemon = () => {
     fetchRandom()
     setIsRotated(!isRotated)
   }
-  // const closeIconClick = () => {
-  //   setRandomPokemon()
-  // }
+
+  const boxRef = useRef()
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (boxRef.current && !boxRef.current.contains(event.target)) {
+        setShouldClose(true)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [boxRef])
+  useEffect(() => {
+    if (shouldClose) {
+      setRandomPokemon(null)
+      setIsRotated(false)
+      setShouldClose(false)
+    }
+  }, [shouldClose])
 
   const backgroundColor = randomPokemon ? typeColors[randomPokemon.type] : undefined
 
@@ -78,7 +98,6 @@ export const RandomPokemon = () => {
         display="flex"
         width="200px"
         height="370px"
-        cursor="pointer"
         margin="auto"
         gap={10}
         textTransform="capitalize"
@@ -88,7 +107,8 @@ export const RandomPokemon = () => {
         boxShadow="0 0 10px rgba(0, 0, 0, 1)"
         fontSize="16px"
         fontWeight="600"
-        justifyContent="center">
+        justifyContent="center"
+        ref={boxRef}>
         {randomPokemon && (
           <Box display="flex" flexDir="column">
             <Box
