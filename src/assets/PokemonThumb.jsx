@@ -71,7 +71,6 @@ export const PokemonThumb = ({ id, name, image, type }) => {
               {type}
             </Button>
           </Box>
-          <Box></Box>
         </CardBody>
       </Card>
     </Box>

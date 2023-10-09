@@ -11,6 +11,7 @@ export function InputBar({ onSearch }) {
   }
 
   const [onClick, setOnClick] = useState(false)
+
   const handleOnClick = () => {
     setOnClick(true)
   }
@@ -23,17 +24,16 @@ export function InputBar({ onSearch }) {
       <Input
         border="none"
         bgColor="#DDDDDD"
-        height={40}
-        mt={44}
-        ml={44}
-        borderTopRightRadius={8}
-        borderTopLeftRadius={8}
+        height="40px"
+        mt="45px"
+        ml="45px"
+        borderRadius="15px"
+        fontSize="22px"
+        pl="25px"
+        type="text"
         placeholder="Search for pokemon !"
-        fontSize={22}
-        pl={14}
         onClick={handleOnClick}
         onBlur={onBlur}
-        type="text"
         value={searchTerm}
         onChange={(event) => setSearchTerm(event.target.value)}
         onKeyDown={handleEnterPress}
