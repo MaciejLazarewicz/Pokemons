@@ -48,6 +48,7 @@ const PokemonList = () => {
 
     fetchSpeciesData()
   }, [id])
+
   // useEffect(() => {
   //   const fetchGenderData = async () => {
   //     try {

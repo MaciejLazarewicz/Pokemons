@@ -1,104 +1,140 @@
+// ;<Box display="flex" flexDir="column" width="100%" textTransform="capitalize">
+//   <Header />
+//   <Box
+//     display="grid"
+//     gridTemplateColumns="repeat(auto-fit,minmax(200px,1fr))"
+//     width="70%"
+//     bgColor="#f51"
+//     justifyItems="center">
+//     <Box
+//       width="200px"
+//       height="200px"
+//       display="flex"
+//       textTransform="capitalize"
+//       flexDir="column"
+//       alignItems="center">
+//       <Image pl={40} pt={20} width="250px" height="250px" src={image} alt={name} />
+//       <Box
+//         textTransform="capitalize"
+//         border="none"
+//         mt={20}
+//         mb={50}
+//         fontSize={20}
+//         bgColor={backgroundColor}
+//         width="100px"
+//         height="50px"
+//         borderRadius="20%"
+//         display="flex"
+//         alignItems="center"
+//         justifyContent="center">
+//         <Text>{type}</Text>
+//       </Box>
 
+//       <Box display="flex" fontSize="15px" pt={100}>
+//         <Text>Hp {hp}</Text>
+//         <Text>Attack {attack}</Text>
+//         <Text>Defense {defense}</Text>
+//         <Text>Sp.Attack {specialAttack}</Text>
+//         <Text>Sp.Defense {specialDefense}</Text>
+//         <Text>Speed {speed}</Text>
+//       </Box>
+//     </Box>
+//     <Box>
+//       <Box display="flex" flexDir="column" alignItems="center">
+//         <Text as="h4" mb="5px" fontSize="30px" color="##202020">
+//           {name}
+//         </Text>
+//         <Text as="p" mt="5px" fontSize="20px" color="#707070">
+//           #{id}
+//         </Text>
+//         <Text fontSize="20px" fontWeight="bold" width="400px">
+//           {text}
+//         </Text>
+//       </Box>
+//       <Box
+//         display="grid"
+//         bgColor="#3F51B5"
+//         width="400px"
+//         height="150px"
+//         alignItems="center"
+//         justifyItems="center"
+//         borderRadius="15px"
+//         gridTemplateColumns="repeat(auto-fit,minmax(200px,1fr))"
+//         fontSize="20px">
+//         <Box>
+//           <Text m="5px" color="#F3F3E9">
+//             Height
+//           </Text>
+//           <Text m="5px" color="#F50065">
+//             {height}
+//           </Text>
+//         </Box>
+//         <Box>
+//           <Text m="5px" color="#F3F3E9">
+//             Weight
+//           </Text>
+//           <Text color="#F50065" m="5px">
+//             {weight}
+//           </Text>
+//         </Box>
+//         <Box>
+//           <Text m="5px" color="#F3F3E9">
+//             Ability
+//           </Text>
+//           <Text m="5px" color="#F50065">
+//             {ability}
+//           </Text>
+//         </Box>
+//         <Box>
+//           <Text m="5px" color="#F3F3E9">
+//             Gender
+//           </Text>
+//         </Box>
+//       </Box>
+//     </Box>
+//   </Box>
+// </Box>
 
+//  <Box display="flex" flexDir="column" marginLeft="50px" width="400px">
+//           <Box display="flex" flexDir="column" alignItems="center" fontSize="20px">
+//             <Text as="h4" marginBottom="5px" color="##202020">
+//               {name}
+//             </Text>
+//             <Text marginTop="5px" color="#707070">
+//               #{id}
+//             </Text>
+//           </Box>
+//           <Box display="flex" flexDir="column" alignItems="center">
+//             <Text>{text}</Text>
+//           </Box>
 
-
-const handleRandomPokemon = async () => {
-    try {
-      setLoading(true)
-      await getAllPokemons(currentPage)
-      const maxIndex = allPokemons.length
-      const randomIndex = Math.floor(Math.random() * maxIndex)
-      const randomPokemonData = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${allPokemons[randomIndex].name}`
-      ).then((res) => res.json())
-      setRandomPokemon(randomPokemonData)
-    } catch (error) {
-      console.error('Error fetching random Pokemon:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-const [randomPokemon, setRandomPokemon] = useState(null)
-
-
-
-
-
-
-
-
-.rock {
-  background-color: rgb(148, 81, 81);
-}
-.ghost {
-  background-color: rgb(247, 247, 247);
-}
-.electric {
-  background-color: rgb(255, 255, 161);
-}
-.bug {
-  background-color: #F6D6A7;
-}
-.poison {
-  background-color: #e0a7f6;
-}
-.normal {
-  background-color: #F4F4F4;
-}
-.fairy {
-  background-color: rgba(255, 192, 203, 0.863);
-}
-.fire {
-  background-color: #FBE3DF;
-}
-.grass {
-  background-color:#E2F9E1;
-}
-.water {
-  background-color:#E0F1FD;
-}
-
-function createPokemonObject (results) {
-
-      results.forEach(async pokemon => {
-        
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-        const data = await res.json()
-       
-        
-        setAllPokemons(currentList => [...currentList, data])        
-        
-        
-      })
-      
-}
-    
-
-
-const handleSearch = async (searchTerm) => {
-    setCurrentPage('https://pokeapi.co/api/v2/pokemon?limit=20')
-    setAllPokemons([])
-    if (searchTerm.trim() !== '') {
-      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm.toLowerCase()}`)
-      if (res.ok) {
-        const data = await res.json()
-        setAllPokemons([data])
-      }
-    } else {
-      await getAllPokemons(currentPage)
-    }
-}
-  
-
-
-
-
-image={pokemon.sprites.other.dream_world.front_default}
-            type={pokemon.types[0].type.name}
-            hp={pokemon.stats[0].base_stat}
-            attack={pokemon.stats[1].base_stat}
-            defense={pokemon.stats[2].base_stat}
-            specialAttack={pokemon.stats[3].base_stat}
-            specialDefense={pokemon.stats[4].base_stat}
-            speed={pokemon.stats[5].base_stat}
+//           <Box
+//             display="flex"
+//             gap="50px"
+//             height="150px"
+//             bgColor="#3f51b5"
+//             alignItems="center"
+//             justifyContent="center"
+//             borderRadius="15px">
+//             <Box>
+//               <Text>Height</Text>
+//               <Text display="flex" justifyContent="center">
+//                 {height}
+//               </Text>
+//             </Box>
+//             <Box>
+//               <Text>Weight </Text>
+//               <Text display="flex" justifyContent="center">
+//                 {weight}
+//               </Text>
+//             </Box>
+//             <Box>
+//               <Text display="flex" justifyContent="center">
+//                 Ability
+//               </Text>
+//               <Text display="flex" justifyContent="center">
+//                 {ability}
+//               </Text>
+//             </Box>
+//           </Box>
+//         </Box>
