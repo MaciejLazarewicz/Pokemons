@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react'
 import PokemonThumb from '../PokemonThumb'
 import Pagination from '../Pagination'
 import Header from '../Header'
-
 import SpinnerComponent from '../Spinner'
-
 import useSearch from '../hooks/useSearch'
+import Footer from '../Footer'
+import BackToTop from '../BackToTop'
 
 function Home() {
   const [allPokemons, setAllPokemons] = useState([])
@@ -104,6 +104,9 @@ function Home() {
           </Box>
         ))}
       </Box>
+      <BackToTop />
+
+      <Footer />
     </Box>
   )
 }
