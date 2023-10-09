@@ -2,6 +2,7 @@ import { Box, Button, Image, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import Header from '../Header'
 import { typeColors } from '../PokemonThumb'
+import { ComposedChart, XAxis, YAxis, Tooltip, CartesianGrid, Bar } from 'recharts'
 
 export const PokemonStats = ({
   id,
@@ -21,98 +22,62 @@ export const PokemonStats = ({
 }) => {
   const backgroundColor = typeColors[type]
 
+  const data = [
+    { name: 'HP', value: hp, fill: '#E41717' },
+    { name: 'Attack', value: attack, fill: '#717069' },
+    { name: 'Def', value: defense, fill: '#E2F9E1' },
+    { name: 'Sp.Attack', value: specialAttack, fill: '#E0F1FD' },
+    { name: 'Sp.Def', value: specialDefense, fill: '#0099a9' },
+    { name: 'Speed', value: speed, fill: '#B9BCBF' }
+  ]
   return (
-    <Box display="flex" flexDir="column" width="100%" textTransform="capitalize">
+    <Box display="flex" flexDir="column">
       <Header />
       <Box
         display="grid"
-        gridTemplateColumns="repeat(auto-fit,minmax(200px,1fr))"
-        width="70%"
-        bgColor="#f51"
-        justifyItems="center">
-        <Box
-          width="200px"
-          height="200px"
-          display="flex"
-          textTransform="capitalize"
-          flexDir="column"
-          alignItems="center">
-          <Image pl={40} pt={20} width="250px" height="250px" src={image} alt={name} />
-          <Box
-            textTransform="capitalize"
-            border="none"
-            mt={20}
-            mb={50}
-            fontSize={20}
-            bgColor={backgroundColor}
-            width="100px"
-            height="50px"
-            borderRadius="20%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center">
-            <Text>{type}</Text>
+        gridTemplateColumns="repeat(auto-fit,minmax(300px,1fr))"
+        textTransform="capitalize">
+        <Box display="flex" flexDir="column">
+          <Box display="flex" flexDir="column" alignItems="center" marginTop="50px">
+            <Image width="300px" height="400px" src={image} alt={name} />
+            <Text
+              display="flex"
+              width="100px"
+              height="50px"
+              fontSize="25px"
+              bgColor={backgroundColor}
+              borderRadius="15px"
+              alignItems="center"
+              justifyContent="center"
+              marginTop="5px">
+              {type}
+            </Text>
           </Box>
+          <Box display="flex" flexDir="column" alignItems="center" marginTop="50px">
+            <ComposedChart width={430} height={250} data={data}>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
 
-          <Box display="flex" fontSize="15px" pt={100}>
-            <Text>Hp {hp}</Text>
-            <Text>Attack {attack}</Text>
-            <Text>Defense {defense}</Text>
-            <Text>Sp.Attack {specialAttack}</Text>
-            <Text>Sp.Defense {specialDefense}</Text>
-            <Text>Speed {speed}</Text>
+              <CartesianGrid stroke="#f5f5f5" />
+
+              <Bar dataKey="value" barSize={20} />
+            </ComposedChart>
           </Box>
         </Box>
-        <Box>
-          <Box display="flex" flexDir="column" alignItems="center">
-            <Text as="h4" mb="5px" fontSize="30px" color="##202020">
-              {name}
-            </Text>
-            <Text as="p" mt="5px" fontSize="20px" color="#707070">
-              #{id}
-            </Text>
-            <Text fontSize="20px" fontWeight="bold" width="400px">
-              {text}
-            </Text>
+        <Box display="flex" flexDir="column">
+          <Box display="flex" flexDir="column" alignItems="center" marginTop="50px">
+            <Text>{name}</Text>
+            <Text>{id}</Text>
+            <Text width="300px">{text}</Text>
           </Box>
-          <Box
-            display="grid"
-            bgColor="#3F51B5"
-            width="400px"
-            height="150px"
-            alignItems="center"
-            justifyItems="center"
-            borderRadius="15px"
-            gridTemplateColumns="repeat(auto-fit,minmax(200px,1fr))"
-            fontSize="20px">
-            <Box>
-              <Text m="5px" color="#F3F3E9">
-                Height
-              </Text>
-              <Text m="5px" color="#F50065">
-                {height}
-              </Text>
-            </Box>
-            <Box>
-              <Text m="5px" color="#F3F3E9">
-                Weight
-              </Text>
-              <Text color="#F50065" m="5px">
-                {weight}
-              </Text>
-            </Box>
-            <Box>
-              <Text m="5px" color="#F3F3E9">
-                Ability
-              </Text>
-              <Text m="5px" color="#F50065">
-                {ability}
-              </Text>
-            </Box>
-            <Box>
-              <Text m="5px" color="#F3F3E9">
-                Gender
-              </Text>
+          <Box display="flex" flexDir="column" alignItems="center">
+            <Box display="flex" gap="20px">
+              <Text>Height {height}</Text>
+
+              <Text>Weight {weight}</Text>
+
+              <Text>Ability: {ability}</Text>
             </Box>
           </Box>
         </Box>

@@ -28,8 +28,6 @@ function NavButton({ handleMouseEnter, handleMouseLeave }) {
   }
 
   const customLinkStyles = {
-    borderStyle: 'none',
-    bgColor: 'inherit',
     cursor: 'pointer',
     textDecoration: 'none',
     color: ' inherit'
@@ -38,9 +36,8 @@ function NavButton({ handleMouseEnter, handleMouseLeave }) {
   const customButtonStyles = {
     fontSize: 'inherit',
     fontWeight: 'inherit',
-    borderStyle: 'inherit',
-    cursor: 'pointer',
-    bgColor: 'inherit'
+
+    cursor: 'pointer'
   }
 
   return (
@@ -75,9 +72,9 @@ function NavButton({ handleMouseEnter, handleMouseLeave }) {
           <Box>
             <Box borderTop={COMMON_BORDER} borderBottom={COMMON_BORDER} {...COMMON_BOX_STYLES}>
               <DrawerBody>
-                <Button onClick={onClose} {...customLinkStyles}>
+                <Link to="/" onClick={onClose} {...customLinkStyles}>
                   Home
-                </Button>
+                </Link>
               </DrawerBody>
             </Box>
             <Box {...COMMON_BOX_STYLES} borderBottom={COMMON_BORDER}>
