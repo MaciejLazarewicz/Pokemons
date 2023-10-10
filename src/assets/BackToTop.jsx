@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from '@chakra-ui/react'
 import { ArrowUpIcon } from '@chakra-ui/icons'
+import { chevronCommonStyles } from './Pagination'
+
+import { BG_HOVER } from './Navigation'
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -14,7 +17,7 @@ const ScrollToTopButton = () => {
   }
 
   const handleScroll = () => {
-    if (window.scrollY > 1000) {
+    if (window.scrollY > 1500) {
       setIsVisible(true)
     } else {
       setIsVisible(false)
@@ -31,15 +34,21 @@ const ScrollToTopButton = () => {
   return (
     <Button
       onClick={scrollToTop}
-      isVisible={isVisible}
       position="fixed"
       bottom="30"
-      right="-10"
+      right="-5"
       zIndex="999"
       display={isVisible ? 'block' : 'none'}
       border="none"
-      bgColor="transparent">
-      <ArrowUpIcon boxSize={50} cursor="pointer" />
+      bgColor="transparent"
+      {...chevronCommonStyles}>
+      <ArrowUpIcon
+        transition="background-color 1s ease"
+        borderRadius="30px"
+        boxSize={40}
+        cursor="pointer"
+        _hover={{ bgColor: BG_HOVER }}
+      />
     </Button>
   )
 }

@@ -8,8 +8,6 @@ const PokemonList = () => {
   const [pokemonData, setPokemonData] = useState(null)
   const [speciesData, setSpeciesData] = useState(null)
 
-  const [genderData, setGenderData] = useState(null)
-
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
@@ -48,26 +46,6 @@ const PokemonList = () => {
 
     fetchSpeciesData()
   }, [id])
-
-  // useEffect(() => {
-  //   const fetchGenderData = async () => {
-  //     try {
-  //       const response = await fetch(`https://pokeapi.co/api/v2/gender/${id}/`)
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok')
-  //       }
-
-  //       const data = await response.json()
-  //       console.log('Fetched Berry Data:', data)
-
-  //       setGenderData(data)
-  //     } catch (error) {
-  //       console.error('Error fetching Berry Data:', error)
-  //     }
-  //   }
-
-  //   fetchGenderData()
-  // }, [id])
 
   if (!pokemonData || !speciesData) {
     return <div>Loading...</div>

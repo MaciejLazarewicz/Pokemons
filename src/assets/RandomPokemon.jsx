@@ -89,7 +89,7 @@ export const RandomPokemon = () => {
   return (
     <Box
       display="flex"
-      backgroundImage="./PokeBackground.jpg"
+      backgroundImage="./Images/PokeBackground.jpg"
       backgroundSize="cover"
       backgroundPosition="center"
       height="100vh"
@@ -98,8 +98,8 @@ export const RandomPokemon = () => {
         display="flex"
         width="200px"
         height="370px"
-        margin="auto"
-        gap={10}
+        margin="200px auto 0px auto "
+        gap="10px"
         textTransform="capitalize"
         flexDir="column"
         backgroundColor={backgroundColor}
@@ -137,7 +137,7 @@ export const RandomPokemon = () => {
 
               <Text>{randomPokemon.name}</Text>
 
-              <Box display="flex" gap={10}>
+              <Box display="flex" gap="10px">
                 <Text> {randomPokemon.type}</Text>
                 <Text>#{randomPokemon.id}</Text>
               </Box>
@@ -151,7 +151,7 @@ export const RandomPokemon = () => {
             onClick={buttonClick}
             style={buttonStyle}
             background="transparent">
-            <Image src="./fight.png" alt="Pokeball" />
+            <Image src="./Images/fight.png" alt="Pokeball" />
           </Button>
         </Box>
       </Box>

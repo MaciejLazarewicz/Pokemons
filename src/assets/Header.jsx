@@ -4,16 +4,16 @@ import NavButton from './Navigation'
 
 export function Header() {
   return (
-    <Box display="flex" bgColor="#F50057" justifyContent="space-between" width="100%" ml={0}>
-      <Box ml={26}>
+    <Box display="flex" bgColor="#F50057" justifyContent="space-between" width="100%" ml="0">
+      <Box ml="26px">
         <Link href="https://www.pokemon.com/us/pokedex" textDecoration="none">
-          <Heading as="h2" fontSize={36} color="#ffffff">
+          <Heading as="h2" fontSize="36px" color="#ffffff">
             PokeDex
           </Heading>
         </Link>
       </Box>
       <Stack direction="row">
-        <Box mr={24} mt={10} display="flex" alignItems="center">
+        <Box mr="24px" mt="10px" display="flex" alignItems="center">
           <NavButton />
         </Box>
       </Stack>
