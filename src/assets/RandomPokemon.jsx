@@ -103,6 +103,7 @@ export const RandomPokemon = () => {
         textTransform="capitalize"
         flexDir="column"
         backgroundColor={backgroundColor}
+        opacity="65%"
         borderRadius="10px"
         boxShadow="0 0 10px rgba(0, 0, 0, 1)"
         fontSize="16px"

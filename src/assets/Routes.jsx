@@ -1,18 +1,21 @@
-// import React from 'react'
-// import { Route, Routes } from 'react-router-dom'
-// import PokemonStats from './pages/PokemonStats'
-// import Home from './pages/Home'
-// import { BrowserRouter as Router } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
+import React from 'react'
+import PokemonList from './PokemonList'
+import PokemonGenerator from './pages/PokemonGenerator'
+import App from '../App'
 
-// const AppRoutes = () => {
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/Home" element={<Home />} />
-//         <Route path="/PokemonStats/:id" element={<PokemonStats />} />
-//       </Routes>
-//     </Router>
-//   )
-// }
-
-// export default AppRoutes
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />
+  },
+  {
+    path: '/PokemonList/:id',
+    element: <PokemonList />
+  },
+  {
+    path: '/RandomPokemon',
+    element: <PokemonGenerator />
+  }
+])
+export default router
