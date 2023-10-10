@@ -25,7 +25,11 @@ function NavButton({ handleMouseEnter, handleMouseLeave }) {
     alignItems: 'center',
     flexDirection: 'column',
     pt: '20px',
-    pb: '20px'
+    pb: '20px',
+    _hover: {
+      backgroundColor: 'rgba(245, 0, 101,0.5)',
+      transition: 'background-color 1s ease-in'
+    }
   }
 
   const customLinkStyles = {

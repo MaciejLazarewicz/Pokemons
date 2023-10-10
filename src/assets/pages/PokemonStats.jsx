@@ -1,5 +1,5 @@
 import { Box, Image, Text, Button } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import Header from '../Header'
 import { typeColors } from '../PokemonThumb'
 import { ComposedChart, XAxis, YAxis, Tooltip, CartesianGrid, Bar } from 'recharts'
@@ -28,6 +28,7 @@ export const PokemonStats = ({
     height: '80px',
     colorScheme: 'teal',
     marginTop: '50px',
+    marginBottom: '40px',
     variant: 'outline',
     color: '#f50065',
     fontWeight: 'bold',
@@ -35,7 +36,13 @@ export const PokemonStats = ({
     backgroundColor: 'inherit',
     cursor: 'pointer',
     paddingLeft: '20px',
-    paddingRight: '20px'
+    paddingRight: '20px',
+    _hover: {
+      backgroundColor: '#f50065',
+      color: '#FFFFFF',
+      border: '2px solid #0c0101',
+      transition: '0.5s linear'
+    }
   }
 
   const basicFlex = {
@@ -64,6 +71,7 @@ export const PokemonStats = ({
     { name: 'Sp.Def', value: specialDefense, fill: '#0099a9' },
     { name: 'Speed', value: speed, fill: '#B9BCBF' }
   ]
+
   return (
     <Box {...basicFlex}>
       <Header />
@@ -77,10 +85,10 @@ export const PokemonStats = ({
       </Box>
       <Box
         display="grid"
-        gridTemplateColumns="repeat(auto-fit,minmax(430px,1fr))"
+        gridTemplateColumns="repeat(auto-fit,minmax(450px,1fr))"
         textTransform="capitalize"
         justifyItems="center">
-        <Box {...basicFlex} width="430px">
+        <Box {...basicFlex} width="400px" mr="0">
           <Box {...basicFlex} alignItems="center">
             <Image width="300px" height="350px" src={image} alt={name} />
             <Text
@@ -94,7 +102,7 @@ export const PokemonStats = ({
             </Text>
           </Box>
 
-          <Box {...basicFlex} alignItems="center">
+          <Box {...basicFlex} alignItems="center" mb="10px">
             <ComposedChart width={430} height={250} data={data}>
               <XAxis dataKey="name" />
               <YAxis />
@@ -106,7 +114,7 @@ export const PokemonStats = ({
             </ComposedChart>
           </Box>
         </Box>
-        <Box {...basicFlex} width="100%" alignItems="center" fontWeight="bold">
+        <Box {...basicFlex} mr="0" width="100%" alignItems="center" fontWeight="bold">
           <Text width="70%" fontSize="25px">
             {text}
           </Text>

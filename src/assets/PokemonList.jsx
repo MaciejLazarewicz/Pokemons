@@ -4,14 +4,24 @@ import { PokemonStats } from './pages/PokemonStats'
 import { Box } from '@chakra-ui/react'
 
 const PokemonList = () => {
-  const { id } = useParams()
+  const { id, name } = useParams() // Odczytaj zarówno id, jak i name z parametrów
+
   const [pokemonData, setPokemonData] = useState(null)
   const [speciesData, setSpeciesData] = useState(null)
 
   useEffect(() => {
     const fetchPokemonData = async () => {
       try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        let url
+        if (id) {
+          url = `https://pokeapi.co/api/v2/pokemon/${id}`
+        } else if (name) {
+          url = `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
+        } else {
+          return
+        }
+
+        const response = await fetch(url)
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
@@ -26,11 +36,21 @@ const PokemonList = () => {
     }
 
     fetchPokemonData()
-  }, [id])
+  }, [id, name])
+
   useEffect(() => {
     const fetchSpeciesData = async () => {
       try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
+        let url
+        if (id) {
+          url = `https://pokeapi.co/api/v2/pokemon-species/${id}/`
+        } else if (name) {
+          url = `https://pokeapi.co/api/v2/pokemon-species/${name.toLowerCase()}/`
+        } else {
+          return
+        }
+
+        const response = await fetch(url)
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
@@ -45,7 +65,7 @@ const PokemonList = () => {
     }
 
     fetchSpeciesData()
-  }, [id])
+  }, [id, name])
 
   if (!pokemonData || !speciesData) {
     return <div>Loading...</div>
