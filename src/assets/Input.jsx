@@ -19,19 +19,32 @@ export function InputBar({ onSearch }) {
     setOnClick(false)
   }
 
+  const inputStyles = {
+    bgColor: '#DDDDDD',
+    height: '40px',
+    marginTop: '45px',
+    marginLeft: '45px',
+    paddingLeft: '25px',
+    borderRadius: '15px',
+    border: 'none',
+    fontSize: '22px',
+    type: 'text',
+    cursor: 'pointer',
+    placeholder: 'Search Pokemons!',
+
+    _focus: {
+      border: '2px solid #f50065',
+      outline: 'none',
+      backgroundColor: '#F3F3F3',
+      paddingLeft: '23px',
+      marginTop: '43px'
+    }
+  }
+
   return (
     <Box>
       <Input
-        border="none"
-        bgColor="#DDDDDD"
-        height="40px"
-        mt="45px"
-        ml="45px"
-        borderRadius="15px"
-        fontSize="22px"
-        pl="25px"
-        type="text"
-        placeholder="Search for pokemon !"
+        {...inputStyles}
         onClick={handleOnClick}
         onBlur={onBlur}
         value={searchTerm}

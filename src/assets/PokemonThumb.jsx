@@ -31,9 +31,11 @@ export const PokemonThumb = ({ id, name, image, type }) => {
 
   return (
     <Box height="350px" display="flex" mt={8} boxShadow="0 0 10px rgba(0, 0, 0, 0.3)">
-      <Card bgColor="#FFFFFF" borderRadius="5%">
+      <Card>
         <CardBody>
           <Box
+            bgColor="#FFFFFF"
+            borderRadius="5px"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             cursor="pointer"
@@ -48,8 +50,8 @@ export const PokemonThumb = ({ id, name, image, type }) => {
               display="flex"
               alignItems="center"
               justifyContent="center"
-              gap={40}
-              fontSize={30}
+              gap="40px"
+              fontSize="30px"
               color="#202020"
               textTransform="capitalize">
               <p>{name}</p>
@@ -61,13 +63,13 @@ export const PokemonThumb = ({ id, name, image, type }) => {
               textTransform="capitalize"
               cursor="pointer"
               border="none"
-              mt={20}
-              mb={50}
-              fontSize={20}
+              mt="20px"
+              mb="50px"
+              fontSize="20px"
               bgColor={backgroundColor}
               width="100px"
               height="50px"
-              borderRadius="20%">
+              borderRadius="20px">
               {type}
             </Button>
           </Box>

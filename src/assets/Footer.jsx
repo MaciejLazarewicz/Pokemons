@@ -15,8 +15,9 @@ export const Footer = () => {
       position="fixed"
       bottom="0"
       height="20px"
-      width="100%">
-      <Text marginTop="15px">Maciej Lazarewicz</Text>
+      width="100%"
+      mt="0px">
+      <Text>Maciej Lazarewicz</Text>
     </Box>
   )
 }

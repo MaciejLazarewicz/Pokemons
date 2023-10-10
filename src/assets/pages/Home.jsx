@@ -1,4 +1,4 @@
-import { Box, Stack } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import InputBar from '../Input'
 import { useEffect, useState } from 'react'
 import PokemonThumb from '../PokemonThumb'

@@ -4,6 +4,7 @@ import Header from '../Header'
 import { typeColors } from '../PokemonThumb'
 import { ComposedChart, XAxis, YAxis, Tooltip, CartesianGrid, Bar } from 'recharts'
 import { Link } from 'react-router-dom'
+import Footer from '../Footer'
 
 export const PokemonStats = ({
   id,
@@ -23,6 +24,38 @@ export const PokemonStats = ({
 }) => {
   const backgroundColor = typeColors[type]
 
+  const buttonStyles = {
+    height: '80px',
+    colorScheme: 'teal',
+    marginTop: '50px',
+    variant: 'outline',
+    color: '#f50065',
+    fontWeight: 'bold',
+    border: '2px solid #f50065',
+    backgroundColor: 'inherit',
+    cursor: 'pointer',
+    paddingLeft: '20px',
+    paddingRight: '20px'
+  }
+
+  const basicFlex = {
+    display: 'flex',
+    flexDirection: 'column'
+  }
+
+  const contentFlex = {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+
+  const fontAndRadius = {
+    fontSize: '20px',
+    borderRadius: '20px'
+  }
+  const marginBottom = {
+    marginBottom: '0px'
+  }
+
   const data = [
     { name: 'HP', value: hp, fill: '#E41717' },
     { name: 'Attack', value: attack, fill: '#717069' },
@@ -32,19 +65,13 @@ export const PokemonStats = ({
     { name: 'Speed', value: speed, fill: '#B9BCBF' }
   ]
   return (
-    <Box display="flex" flexDir="column">
+    <Box {...basicFlex}>
       <Header />
-      <Box
-        display="flex"
-        height="100%"
-        justifyContent="center"
-        alignItems="center"
-        flexDir="column"
-        textTransform="capitalize">
-        <Text fontSize="30px" as="h4" mb="5px" color="#202020">
+      <Box {...basicFlex} height="100%" {...contentFlex} textTransform="capitalize">
+        <Text fontSize="30px" as="h4" {...marginBottom} color="#202020">
           {name}
         </Text>
-        <Text mt="5px" fontSize="20px" color="#707070">
+        <Text mt="5px" {...fontAndRadius} color="#707070">
           #{id}
         </Text>
       </Box>
@@ -53,85 +80,65 @@ export const PokemonStats = ({
         gridTemplateColumns="repeat(auto-fit,minmax(430px,1fr))"
         textTransform="capitalize"
         justifyItems="center">
-        <Box display="flex" flexDir="column" width="430px">
-          <Box display="flex" flexDir="column" alignItems="center">
+        <Box {...basicFlex} width="430px">
+          <Box {...basicFlex} alignItems="center">
             <Image width="300px" height="350px" src={image} alt={name} />
             <Text
               display="flex"
               width="100px"
               height="50px"
-              fontSize="25px"
+              {...fontAndRadius}
               bgColor={backgroundColor}
-              borderRadius="15px"
-              alignItems="center"
-              justifyContent="center">
+              {...contentFlex}>
               {type}
             </Text>
           </Box>
 
-          <Box display="flex" flexDir="column" alignItems="center">
+          <Box {...basicFlex} alignItems="center">
             <ComposedChart width={430} height={250} data={data}>
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
 
-              <CartesianGrid stroke="#f5f5f5" />
+              <CartesianGrid stroke="#F3F3F3" />
 
               <Bar dataKey="value" barSize={20} />
             </ComposedChart>
           </Box>
         </Box>
-        <Box display="flex" width="100%" flexDir="column" alignItems="center" fontWeight="bold">
+        <Box {...basicFlex} width="100%" alignItems="center" fontWeight="bold">
           <Text width="70%" fontSize="25px">
             {text}
           </Text>
           <Box
-            display="flex"
-            flexDir="column"
+            {...basicFlex}
             alignItems="center"
             height="200px"
             width="70%"
-            fontSize="20px"
-            bgColor="#3F51B5"
-            borderRadius="20px">
+            {...fontAndRadius}
+            bgColor={backgroundColor}>
             <Box display="flex" gap="50px">
-              <Box display="flex" flexDir="column" alignItems="center">
-                <Text color="#F3F3E9" mb="0px">
-                  Height
-                </Text>
-                <Text color="#F50065">{height}</Text>
+              <Box {...basicFlex} alignItems="center">
+                <Text {...marginBottom}>Height</Text>
+                <Text>{height}</Text>
               </Box>
-              <Box display="flex" flexDir="column" alignItems="center">
-                <Text color="#F3F3E9" mb="0px">
-                  Weight
-                </Text>
-                <Text color="#F50065">{weight}</Text>
+              <Box {...basicFlex} alignItems="center">
+                <Text {...marginBottom}>Weight</Text>
+                <Text>{weight}</Text>
               </Box>
             </Box>
-            <Box display="flex" flexDir="column" alignItems="center">
-              <Text color="#F3F3E9" mt="0px" mb="0px">
+            <Box {...basicFlex} alignItems="center">
+              <Text mt="0px" {...marginBottom}>
                 Ability
               </Text>
-              <Text color="#F50065">{ability}</Text>
+              <Text>{ability}</Text>
             </Box>
           </Box>
           <Link to="/" width="30%">
-            <Button
-              height="80px"
-              mt="50px"
-              colorScheme="teal"
-              variant="outline"
-              color="#F50065"
-              fontWeight="bold"
-              border="2px solid #F50065"
-              backgroundColor="inherit"
-              cursor="pointer"
-              pl="20px"
-              pr="20px">
-              SEARCH FOR ANOTHER POKEMON
-            </Button>
+            <Button {...buttonStyles}>SEARCH FOR ANOTHER POKEMON</Button>
           </Link>
         </Box>
+        <Footer />
       </Box>
     </Box>
   )

@@ -2,15 +2,14 @@ import { Box } from '@chakra-ui/react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 import CustomLink from './CustomLink'
+export const chevronCommonStyles = {
+  boxSize: 50,
+  cursor: 'pointer',
+  color: '#0D131A',
+  _hover: { color: '#F50057' }
+}
 
 export function Pagination({ handlePrevPage, handleNextPage }) {
-  const chevronCommonStyles = {
-    boxSize: 50,
-    cursor: 'pointer',
-    color: '#0D131A',
-    _hover: { color: '#F50057' }
-  }
-
   const buttonStyle = {
     border: 'none',
     bgcolor: 'inherit'
