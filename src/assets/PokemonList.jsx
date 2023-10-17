@@ -4,7 +4,7 @@ import { PokemonStats } from './pages/PokemonStats'
 import { Box } from '@chakra-ui/react'
 
 const PokemonList = () => {
-  const { id, name } = useParams() // Odczytaj zarówno id, jak i name z parametrów
+  const { id, name } = useParams()
 
   const [pokemonData, setPokemonData] = useState(null)
   const [speciesData, setSpeciesData] = useState(null)
