@@ -13,7 +13,7 @@ export function Header() {
         </Link>
       </Box>
       <Stack direction="row">
-        <Box mr="24px" mt="10px" display="flex" alignItems="center">
+        <Box mr="26px" display="flex" alignItems="center">
           <NavButton />
         </Box>
       </Stack>
