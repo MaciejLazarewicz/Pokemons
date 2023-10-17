@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 export function InputBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
+  const [pokemonData, setPokemonData] = useState(null)
 
   const navigate = useNavigate()
 
@@ -31,11 +32,11 @@ export function InputBar({ onSearch }) {
     if (event.key !== 'Enter') return
 
     try {
-      await fetchPokemonData(searchTerm)
+      const lowercaseTerm = searchTerm.toLowerCase()
+      await fetchPokemonData(lowercaseTerm)
 
-      onSearch(searchTerm)
-      const lowercaseName = searchTerm.toLowerCase()
-      navigate(`/PokemonList/${lowercaseName}`)
+      onSearch(lowercaseTerm)
+      navigate(`/PokemonList/${lowercaseTerm}`)
     } catch (error) {
       setSearchTerm('')
       setPlaceholderText('Try Again!')
