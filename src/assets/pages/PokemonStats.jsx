@@ -14,8 +14,6 @@ export const PokemonStats = ({
   hp,
   attack,
   defense,
-  specialAttack,
-  specialDefense,
   speed,
   height,
   weight,
@@ -67,14 +65,13 @@ export const PokemonStats = ({
     { name: 'HP', value: hp, fill: '#E41717' },
     { name: 'Attack', value: attack, fill: '#717069' },
     { name: 'Def', value: defense, fill: '#E2F9E1' },
-    { name: 'Sp.Attack', value: specialAttack, fill: '#E0F1FD' },
-    { name: 'Sp.Def', value: specialDefense, fill: '#0099a9' },
     { name: 'Speed', value: speed, fill: '#B9BCBF' }
   ]
 
   return (
-    <Box {...basicFlex}>
+    <Box>
       <Header />
+
       <Box {...basicFlex} height="100%" {...contentFlex} textTransform="capitalize">
         <Text fontSize="30px" as="h4" {...marginBottom} color="#202020">
           {name}
@@ -85,10 +82,10 @@ export const PokemonStats = ({
       </Box>
       <Box
         display="grid"
-        gridTemplateColumns="repeat(auto-fit,minmax(450px,1fr))"
+        gridTemplateColumns="repeat(auto-fit,minmax(300px,1fr))"
         textTransform="capitalize"
         justifyItems="center">
-        <Box {...basicFlex} width="400px" mr="0">
+        <Box {...basicFlex} width="300px" mr="0">
           <Box {...basicFlex} alignItems="center">
             <Image width="300px" height="350px" src={image} alt={name} />
             <Text
@@ -102,8 +99,8 @@ export const PokemonStats = ({
             </Text>
           </Box>
 
-          <Box {...basicFlex} alignItems="center" mb="10px">
-            <ComposedChart width={430} height={250} data={data}>
+          <Box {...basicFlex} alignItems="center" mb="10px" mr="20px">
+            <ComposedChart width={300} height={250} data={data}>
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
@@ -146,6 +143,8 @@ export const PokemonStats = ({
             <Button {...buttonStyles}>SEARCH FOR ANOTHER POKEMON</Button>
           </Link>
         </Box>
+      </Box>
+      <Box display="flex" justifyContent="center">
         <Footer />
       </Box>
     </Box>
