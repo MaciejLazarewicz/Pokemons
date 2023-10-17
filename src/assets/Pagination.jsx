@@ -22,7 +22,6 @@ export function Pagination({ handlePrevPage, handleNextPage }) {
   const handleNextClick = (e) => {
     e.preventDefault()
     handleNextPage()
-    console.log('Handling previous click')
   }
 
   return (

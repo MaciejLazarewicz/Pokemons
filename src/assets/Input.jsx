@@ -4,13 +4,41 @@ import { useNavigate } from 'react-router-dom'
 
 export function InputBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('')
+
   const navigate = useNavigate()
 
-  function handleEnterPress(event) {
-    if (event.key === 'Enter') {
+  const [placeholderText, setPlaceholderText] = useState('Search Pokemon!')
+
+  const fetchPokemonData = async (name) => {
+    try {
+      const url = `https://pokeapi.co/api/v2/pokemon/${name}`
+
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+
+      const data = await response.json()
+      console.log('Fetched Pokemon data:', data)
+
+      setPokemonData(data)
+    } catch (error) {
+      throw new Error('Error fetching Pokemon data:', error)
+    }
+  }
+
+  async function handleEnterPress(event) {
+    if (event.key !== 'Enter') return
+
+    try {
+      await fetchPokemonData(searchTerm)
+
       onSearch(searchTerm)
       const lowercaseName = searchTerm.toLowerCase()
       navigate(`/PokemonList/${lowercaseName}`)
+    } catch (error) {
+      setSearchTerm('')
+      setPlaceholderText('Try Again!')
     }
   }
 
@@ -35,7 +63,7 @@ export function InputBar({ onSearch }) {
     fontSize: '22px',
     type: 'text',
     cursor: 'pointer',
-    placeholder: 'Search!',
+    placeholder: placeholderText,
     transition: '0.3s',
     color: '#f50065',
 
